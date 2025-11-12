@@ -1,0 +1,46 @@
+{
+    "ModeToggler": {
+        "dark": "Dark",
+        "light": "Light",
+        "system": "System",
+        "label": "Theme"
+    },
+    "LocaleSwitcher": {
+        "ru": "Russian",
+        "en": "English",
+        "label": "Language"
+    },
+    "Home": {
+        "title": "Home",
+        "description": "Welcome to the home page"
+    },
+    "Navigation": {
+        "Home": "Home",
+        "Form": "Form",
+        "Settings": "Settings"
+    },
+    "NotFound": {
+        "title": "Page not found",
+        "description": "Sorry, the page you are looking for does not exist or has been moved.",
+        "home": "Home",
+        "back": "Back",
+        "popularity": "Popular sections:",
+        "contact": "Contact",
+        "about": "About us",
+        "profile": "Profile"
+    },
+    "Form": {
+        "title": "Form",
+        "description": "This is the form page where you can fill out data.",
+        "usernameRequired": "Username is required",
+        "invalidEmail": "Invalid email",
+        "passwordMin": "Password must be at least 8 characters",
+        "email": "Email",
+        "password": "Password",
+        "Submit": "Submit"
+    },
+    "Settings": {
+        "title": "Settings",
+        "description": "This is the settings page where you can adjust your preferences."
+    }
+}

@@ -1,7 +1,31 @@
+import path from "path";
 import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+    trailingSlash: true,
+    reactStrictMode: false,
+    output: "standalone",
+
+    webpack(config) {
+        config.module.rules.push({
+            test: /\.svg$/i,
+            use: [
+                {
+                    loader: require.resolve("@svgr/webpack"),
+                    options: { typescript: true },
+                },
+            ],
+        });
+
+        config.resolve.alias = {
+            ...(config.resolve.alias || {}),
+            "@": path.resolve(__dirname, "src"),
+        };
+
+        return config;
+    },
 };
 
-export default nextConfig;
+const withNextIntl = createNextIntlPlugin();
+export default withNextIntl(nextConfig);
