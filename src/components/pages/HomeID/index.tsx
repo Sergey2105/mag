@@ -6,6 +6,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { postServices } from "@/services/post.services";
+import Loader from "@/components/Loader";
 
 export default function HomeID() {
     const t = useTranslations("Home");
@@ -36,7 +37,7 @@ export default function HomeID() {
     //     }
     // }, [isError]);
 
-    if (isLoading) return <p>Загрузка...</p>;
+    if (isLoading) return <Loader size="md" fullScreen={true} />;
     if (isError) return <p>Ошибка при загрузке</p>;
 
     return (
