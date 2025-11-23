@@ -4,6 +4,9 @@ import { MENU } from "@/components/layout/Header/menu.data";
 import { MenuItem } from "@/components/layout/Header/MenuItem";
 import { LocaleSwitcher } from "@/components/LocaleSwitcher";
 import { ModeToggle } from "@/components/ModeToggle";
+import { Button } from "@/components/ui/button";
+import { Heart, ShoppingCart, User } from "lucide-react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { match } from "path-to-regexp";
 
@@ -11,14 +14,35 @@ export function Menu() {
     const pathname = usePathname();
 
     return (
-        <nav className="flex items-center gap-6">
-            {MENU.map((menuItem) => (
-                <MenuItem key={menuItem.name} menuItem={menuItem} isActive={!!match(menuItem.href)(pathname)} />
-            ))}
+        <>
+            <div className="flex items-center gap-14">
+                <nav className="flex items-center gap-12">
+                    {MENU.map((menuItem) => (
+                        <MenuItem key={menuItem.name} menuItem={menuItem} isActive={!!match(menuItem.href)(pathname)} />
+                    ))}
+                </nav>
+                <nav className="flex items-center gap-6">
+                    <Link href="/">
+                        <Button variant="ghost" size="icon">
+                            <ShoppingCart className="size-6" />
+                        </Button>
+                    </Link>
+                    <Link href="/">
+                        <Button variant="ghost" size="icon">
+                            <Heart className="size-6" />
+                        </Button>
+                    </Link>
+                    <Link href="/">
+                        <Button variant="ghost" size="icon">
+                            <User className="size-6" />
+                        </Button>
+                    </Link>
+                </nav>
+            </div>
             <div className="flex items-center gap-2">
                 <LocaleSwitcher />
                 <ModeToggle />
             </div>
-        </nav>
+        </>
     );
 }

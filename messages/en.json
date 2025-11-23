@@ -17,7 +17,12 @@
     "Navigation": {
         "Home": "Home",
         "Form": "Form",
-        "Settings": "Settings"
+        "Settings": "Settings",
+
+        "About": "About",
+        "Contacts": "Contact",
+        "Blog": "Blog",
+        "Catalog": "Catalog"
     },
     "NotFound": {
         "title": "Page not found",

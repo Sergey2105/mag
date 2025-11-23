@@ -113,13 +113,13 @@
 @layer base {
     * {
         @apply border-border outline-ring/50;
+        @apply focus:outline-none focus:ring-0;
     }
     body {
         @apply bg-background text-foreground;
+        font-family: "Bricolage Grotesque", sans-serif;
     }
 }
-@layer base {
-    * {
-        @apply focus:outline-none focus:ring-0;
-    }
+.wrapper {
+    @apply max-w-[1400px] mx-auto w-full px-4 xl:px-8;
 }

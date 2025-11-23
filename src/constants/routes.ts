@@ -9,4 +9,12 @@ export const PAGES = {
         ROOT: "/posts",
         BY_ID: (id: string | number) => `/posts/${id}`,
     },
+    ABOUT: "/about",
+    CONTACTS: "/contacts",
+    BLOG: "/blog",
+
+    CATALOG: {
+        ROOT: "/catalog",
+        BY_ID: (categories: string | number) => `/catalog/${categories}`,
+    },
 };

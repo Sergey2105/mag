@@ -17,7 +17,12 @@
     "Navigation": {
         "Home": "Главная",
         "Form": "Форма",
-        "Settings": "Настройки"
+        "Settings": "Настройки",
+
+        "About": "О нас",
+        "Contacts": "Контакты",
+        "Blog": "Блог",
+        "Catalog": "Каталог"
     },
     "NotFound": {
         "title": "Страница не найдена",

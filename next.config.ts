@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
     reactStrictMode: false,
     output: "standalone",
 
+    images: {
+        domains: ["funko.com"],
+    },
+
     webpack(config) {
         config.module.rules.push({
             test: /\.svg$/i,

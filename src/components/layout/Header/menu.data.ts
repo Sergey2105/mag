@@ -10,9 +10,16 @@ export const MENU = [
         href: PAGES.HOME.ROOT,
         name: "Home",
     },
-    { href: PAGES.FORM, name: "Form" },
     {
-        href: PAGES.SETTINGS,
-        name: "Settings",
+        href: PAGES.CATALOG.ROOT,
+        name: "Catalog",
+    },
+    {
+        href: PAGES.ABOUT,
+        name: "About",
+    },
+    {
+        href: PAGES.CONTACTS,
+        name: "Contacts",
     },
 ];
