@@ -24,17 +24,17 @@ export function Menu() {
                 <nav className="flex items-center gap-6">
                     <Link href="/">
                         <Button variant="ghost" size="icon">
-                            <ShoppingCart className="size-6" />
+                            <ShoppingCart className="size-5" />
                         </Button>
                     </Link>
                     <Link href="/">
                         <Button variant="ghost" size="icon">
-                            <Heart className="size-6" />
+                            <Heart className="size-5" />
                         </Button>
                     </Link>
                     <Link href="/">
                         <Button variant="ghost" size="icon">
-                            <User className="size-6" />
+                            <User className="size-5" />
                         </Button>
                     </Link>
                 </nav>

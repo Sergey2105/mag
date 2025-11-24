@@ -1,7 +1,7 @@
 import Breadcrumbs from "@/components/Breadcrumbs";
 import CatalogList from "@/components/CatalogList";
 import { Title } from "@/components/ui/title";
-import { useTranslations } from "next-intl";
+import { getCategories } from "@/lib/db/getCategories";
 
 const categories = [
     {
@@ -60,8 +60,9 @@ const categories = [
     },
 ];
 
-export default function Catalog() {
-    const t = useTranslations("Home");
+export default async function Catalog() {
+    const categories = await getCategories();
+    console.log(categories);
 
     return (
         <>
