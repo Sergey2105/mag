@@ -1,5 +1,4 @@
 "use client";
-
 import { MENU } from "@/components/layout/Header/menu.data";
 import { MenuItem } from "@/components/layout/Header/MenuItem";
 import { LocaleSwitcher } from "@/components/LocaleSwitcher";
@@ -38,10 +37,10 @@ export function Menu() {
                         </Button>
                     </Link>
                 </nav>
-            </div>
-            <div className="flex items-center gap-2">
-                <LocaleSwitcher />
-                <ModeToggle />
+                <div className="flex items-center gap-2">
+                    <LocaleSwitcher />
+                    <ModeToggle />
+                </div>
             </div>
         </>
     );

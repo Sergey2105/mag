@@ -21,7 +21,7 @@ export default function Filters() {
                 </div>
                 <RangeSlider min={0} max={99999} step={100} value={[0, 99999]} />
             </div>
-            <FiltersCheckboxGroup
+            {/* <FiltersCheckboxGroup
                 title={"Производитель"}
                 className="mt-10"
                 limit={6}
@@ -71,7 +71,7 @@ export default function Filters() {
                     { text: "Meizu", value: "20" },
                     { text: "LG", value: "21" },
                 ]}
-            />
+            /> */}
         </div>
     );
 }

@@ -1,23 +1,19 @@
-import prisma from "@/global/prisma/prisma-clint";
 import { NextResponse } from "next/server";
+import { getProducts } from "@/lib/db/getProducts";
+import prisma from "@/global/prisma/prisma-clint";
 
 export async function GET(req: Request) {
     const url = new URL(req.url);
-    const categoryId = url.searchParams.get("categoryId");
+    const slug = url.searchParams.get("category");
+    const query = url.searchParams.get("query");
 
-    let products;
+    const result = await getProducts(slug || undefined, query || undefined);
 
-    if (!categoryId || categoryId === "1") {
-        // "1" = All
-        products = await prisma.product.findMany({
-            include: { category: true },
-        });
-    } else {
-        products = await prisma.product.findMany({
-            where: { categoryID: Number(categoryId) },
-            include: { category: true },
+    if (query) {
+        return NextResponse.json({
+            products: result.products || [],
         });
     }
 
-    return NextResponse.json(products);
+    return NextResponse.json(result);
 }

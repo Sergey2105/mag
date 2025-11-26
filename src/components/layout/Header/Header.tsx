@@ -1,7 +1,12 @@
+"use client";
+
 import { Menu } from "@/components/layout/Header/Menu";
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "../../../shared/icon/Logo.svg";
+import { InputSearch } from "@/components/inputs/InputSearch";
+import { productServices } from "@/services/product.services";
+import { IProductWithCategory } from "@/types/product.interface";
 
 export function Header() {
     return (
@@ -10,6 +15,19 @@ export function Header() {
                 <Link href="/" className="flex items-center gap-3">
                     <Logo className="text-black dark:text-white" />
                 </Link>
+                <div className="mx-10 flex-1">
+                    <InputSearch<IProductWithCategory>
+                        onSearch={(query) => productServices.getProductBySearch(query)}
+                        renderItem={(product) => (
+                            <>
+                                <Image className="rounded-sm h-8 w-8" width={32} height={32} src={product.imageURL} alt={product.name} />
+                                <span>{product.name}</span>
+                            </>
+                        )}
+                        getItemKey={(product) => product.id}
+                        getItemHref={(product) => `/catalog/${product.category.slug}/${product.id}`}
+                    />
+                </div>
 
                 <Menu />
             </div>

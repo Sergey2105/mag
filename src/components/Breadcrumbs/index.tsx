@@ -40,10 +40,12 @@ export default function Breadcrumbs(props: any) {
                     <span className="text-gray-400">/</span>
 
                     {index === crumbs.length - 1 ? (
-                        <span className="font-medium text-black">{item.label === lastLabel ? item.label : t(item.label)}</span>
+                        <span className="font-medium text-black">
+                            {item.label === lastLabel ? item.label : MENU.find((m) => m.href === item.href) ? t(item.label) : item.label}
+                        </span>
                     ) : (
                         <Link href={item.href} className="text-gray-500 hover:text-black transition">
-                            {t(item.label)}
+                            {MENU.find((m) => m.href === item.href) ? t(item.label) : item.label}
                         </Link>
                     )}
                 </div>
