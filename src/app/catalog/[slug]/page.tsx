@@ -11,7 +11,5 @@ interface Props {
 export default async function CategoryPage({ params }: Props) {
     const { slug, id } = await params;
 
-    console.log(slug, id);
-
     return <Category slug={slug} />;
 }

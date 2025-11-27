@@ -1,3 +1,4 @@
+//серверный компонент
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Filters from "@/components/Filters";
 import ProductList from "@/components/ProductList";
@@ -9,8 +10,6 @@ export default async function Category(props: any) {
     const { slug } = props;
 
     const { category, products } = await getProducts(slug);
-
-    console.log(category, products);
     return (
         <>
             <div className="wrapper mt-10">

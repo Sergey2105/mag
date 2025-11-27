@@ -8,7 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 type Item = FilterCheckboxProps;
 
 interface Props {
-    title: string;
+    title?: string;
     items: Item[];
     defaultItems?: Item[];
     limit?: number;
@@ -43,7 +43,7 @@ export const FiltersCheckboxGroup: React.FC<Props> = ({
     if (loading) {
         return (
             <div className={className}>
-                <p className="font-bold mb-3">{title}</p>
+                {title && <p className="font-bold mb-3">{title}</p>}
 
                 {...Array(limit)
                     .fill(0)
@@ -58,7 +58,7 @@ export const FiltersCheckboxGroup: React.FC<Props> = ({
 
     return (
         <div className={className}>
-            <p className="font-bold mb-3">{title}</p>
+            {title && <p className="font-bold mb-3">{title}</p>}
 
             {showAll && (
                 <div className="mb-5">

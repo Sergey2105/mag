@@ -10,7 +10,7 @@ export default function debounce<T extends (...args: any[]) => any>(func: T, tim
 
         timer = setTimeout(() => {
             // @ts-ignore
-            func.apply(this, args);
+            func(...args);
         }, timeout);
     };
 }

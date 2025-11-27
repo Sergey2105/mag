@@ -6,7 +6,6 @@ interface Props {
 
 export default async function CatalogProductPage({ params }: Props) {
     const { slug } = await params;
-    console.log(slug);
 
     return <Product />;
 }

@@ -1,21 +1,17 @@
 import Breadcrumbs from "@/components/Breadcrumbs";
-import CatalogList from "@/components/CatalogList";
+import CatalogContent from "@/components/pages/Catalog/catalog-content";
+import CatalogSkeleton from "@/components/pages/Catalog/catalog-skeleton";
 import { Title } from "@/components/ui/title";
-import { getCategories } from "@/lib/db/getCategories";
+import { Suspense } from "react";
 
-export default async function Catalog() {
-    const categories = await getCategories();
-    console.log(categories);
-
+export default function Catalog() {
     return (
-        <>
-            <div className="wrapper mt-10">
-                <Breadcrumbs className="mt-16" />
-                <Title text="Каталог" size="lg" className="mt-6" />
-                <div className="grid gap-6 mt-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                    <CatalogList list={categories} />
-                </div>
-            </div>
-        </>
+        <div className="wrapper mt-10">
+            <Breadcrumbs className="mt-16" />
+            <Title text="Каталог" size="lg" className="mt-6" />
+            <Suspense fallback={<CatalogSkeleton />}>
+                <CatalogContent />
+            </Suspense>
+        </div>
     );
 }

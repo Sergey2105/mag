@@ -1,15 +1,16 @@
-"use client";
 import CatalogItem from "@/components/CtalogItem";
-import { Title } from "@/components/ui/title";
-import { useTranslations } from "next-intl";
-import Link from "next/link";
+import { Category } from "@prisma/client";
 
-export default function CatalogList(props: any) {
+interface CatalogListProps {
+    list: Category[];
+}
+
+export default function CatalogList(props: CatalogListProps) {
     const { list } = props;
     return (
         <>
             {list.map((cat: any) => (
-                <CatalogItem key={cat.id} name={cat.name} imageURL={cat.imageURL} />
+                <CatalogItem key={cat.id} name={cat.name} imageURL={cat.imageURL} slug={cat.slug} />
             ))}
         </>
     );

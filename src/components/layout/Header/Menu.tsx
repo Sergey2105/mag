@@ -22,17 +22,17 @@ export function Menu() {
                 </nav>
                 <nav className="flex items-center gap-6">
                     <Link href="/">
-                        <Button variant="ghost" size="icon">
+                        <Button variant="outline" size="icon">
                             <ShoppingCart className="size-5" />
                         </Button>
                     </Link>
                     <Link href="/">
-                        <Button variant="ghost" size="icon">
+                        <Button variant="outline" size="icon">
                             <Heart className="size-5" />
                         </Button>
                     </Link>
                     <Link href="/">
-                        <Button variant="ghost" size="icon">
+                        <Button variant="outline" size="icon">
                             <User className="size-5" />
                         </Button>
                     </Link>
