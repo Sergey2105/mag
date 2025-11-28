@@ -1,11 +1,11 @@
 import Product from "@/components/pages/Product";
 
 interface Props {
-    params: { slug: string };
+    params: { id: string };
 }
 
 export default async function CatalogProductPage({ params }: Props) {
-    const { slug } = await params;
+    const { id } = await params;
 
-    return <Product />;
+    return <Product id={id} />;
 }

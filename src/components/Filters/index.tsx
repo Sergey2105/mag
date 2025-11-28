@@ -1,48 +1,58 @@
 "use client";
-import FilterCheckbox from "@/components/FilterCheckbox";
 import { Input } from "@/components/ui/input";
 import { Title } from "@/components/ui/title";
 import { RangeSlider } from "@/components/RangeSlider";
 import { FiltersCheckboxGroup } from "@/components/FiltersCheckboxGroup";
 import { useEffect, useState } from "react";
 import { useSetState } from "@/hooks/useSet";
-import qs from "qs";
-import { useRouter, useSearchParams } from "next/navigation";
 import { useDebounce } from "@/hooks/useDebouce";
+import { useQueryState, parseAsInteger, parseAsArrayOf, parseAsString } from "nuqs";
 
 const MIN_PRICE = 0;
 const MAX_PRICE = 20000;
 
 export default function Filters() {
-    const router = useRouter();
-    const searchParams = useSearchParams();
-    const [price, setPrice] = useState({ priceFrom: Number(searchParams.get("priceFrom")) || undefined, priceTo: Number(searchParams.get("priceTo")) || undefined });
+    const [priceFrom, setPriceFrom] = useQueryState(
+        "priceFrom",
+        parseAsInteger.withDefault(MIN_PRICE).withOptions({
+            shallow: true,
+            clearOnDefault: true,
+        }),
+    );
 
-    const stock = useSetState<string>(["All"]);
+    const debouncedSetPriceFrom = useDebounce(setPriceFrom, 300);
 
-    const handlePriceChange = (name: string, value: number) => {
-        setPrice({
-            ...price,
-            [name]: value,
-        });
-    };
+    const [priceTo, setPriceTo] = useQueryState(
+        "priceTo",
+        parseAsInteger.withDefault(MAX_PRICE).withOptions({
+            shallow: true,
+            clearOnDefault: true,
+        }),
+    );
 
-    const updateUrl = (filters: any) => {
-        const query = qs.stringify(filters, { arrayFormat: "comma", skipNulls: true });
-        router.replace(`?${query}`);
-    };
+    const debouncedSetPriceTo = useDebounce(setPriceTo, 300);
 
-    const debouncedUpdateUrl = useDebounce(updateUrl, 300);
+    const [price, setPrice] = useState({
+        priceFrom: priceFrom,
+        priceTo: priceTo,
+    });
+
+    const [stockQuery, setStockQuery] = useQueryState(
+        "stock",
+        parseAsArrayOf(parseAsString).withDefault(["all"]).withOptions({
+            shallow: true,
+            clearOnDefault: true,
+        }),
+    );
+
+    const debouncedSetStockQuery = useDebounce(setStockQuery, 300);
+
+    const stock = useSetState<string>(stockQuery);
 
     useEffect(() => {
-        const filters = {
-            priceFrom: price.priceFrom || undefined,
-            priceTo: price.priceTo || undefined,
-            stock: stock.setValue.has("All") ? undefined : Array.from(stock.setValue),
-        };
-
-        debouncedUpdateUrl(filters);
-    }, [price, stock, searchParams]);
+        const values = Array.from(stock.setValue);
+        debouncedSetStockQuery(values.length ? values : ["all"]);
+    }, [stock.setValue]);
 
     return (
         <div>
@@ -53,9 +63,9 @@ export default function Filters() {
                     selected={stock.setValue}
                     onClickCheckbox={stock.toggle}
                     items={[
-                        { text: "Все", value: "All" },
-                        { text: "В наличии", value: "Stock" },
-                        { text: "Предзаказ", value: "Preorder" },
+                        { text: "Все", value: "all" },
+                        { text: "В наличии", value: "stock" },
+                        { text: "Предзаказ", value: "preorder" },
                     ]}
                 />
             </div>
@@ -68,7 +78,13 @@ export default function Filters() {
                         min={MIN_PRICE}
                         max={MAX_PRICE}
                         value={String(price.priceFrom)}
-                        onChange={(e) => handlePriceChange("priceFrom", Number(e.target.value))}
+                        onChange={(e) => {
+                            debouncedSetPriceFrom(Number(e.target.value));
+                            setPrice((prev) => ({
+                                ...prev,
+                                priceFrom: Number(e.target.value),
+                            }));
+                        }}
                     />
                     <Input
                         type="number"
@@ -76,15 +92,25 @@ export default function Filters() {
                         min={MIN_PRICE}
                         max={MAX_PRICE}
                         value={String(price.priceTo)}
-                        onChange={(e) => handlePriceChange("priceTo", Number(e.target.value))}
+                        onChange={(e) => {
+                            debouncedSetPriceTo(Number(e.target.value));
+                            setPrice((prev) => ({
+                                ...prev,
+                                priceTo: Number(e.target.value),
+                            }));
+                        }}
                     />
                 </div>
                 <RangeSlider
                     min={MIN_PRICE}
                     max={MAX_PRICE}
                     step={100}
-                    value={[price.priceFrom || MIN_PRICE, price.priceTo || 20000]}
-                    onValueChange={([priceFrom, priceTo]) => setPrice({ priceFrom: priceFrom, priceTo: priceTo })}
+                    value={[price.priceFrom || MIN_PRICE, price.priceTo || MAX_PRICE]}
+                    onValueChange={([from, to]) => {
+                        setPrice({ priceFrom: from, priceTo: to });
+                        debouncedSetPriceFrom(from === MIN_PRICE ? MIN_PRICE : from);
+                        debouncedSetPriceTo(to === MAX_PRICE ? MAX_PRICE : to);
+                    }}
                 />
             </div>
             {/* <FiltersCheckboxGroup
