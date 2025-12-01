@@ -1,3 +1,4 @@
+"use client";
 import { IMenuItem } from "@/components/layout/Header/menu.data";
 import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";

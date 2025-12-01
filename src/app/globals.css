@@ -1,5 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "swiper/css";
+@import "swiper/css/pagination";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -122,4 +124,12 @@
 }
 .wrapper {
     @apply max-w-[1400px] mx-auto w-full px-4 xl:px-8;
+}
+.swiper-pagination-bullet {
+    opacity: 0.3;
+    background-color: #007aff;
+}
+.swiper-pagination-bullet-active {
+    background-color: #2f80ed;
+    opacity: 1;
 }

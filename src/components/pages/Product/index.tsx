@@ -1,4 +1,4 @@
-import Breadcrumbs from "@/components/Breadcrumbs";
+import BreadcrumbsServer from "@/components/Breadcrumbs/BreadcrumbsServer";
 import ProductImage from "@/components/pages/Product/product-image";
 import ProductInfo from "@/components/pages/Product/product-info";
 import { getProductByID } from "@/lib/db/getProduct";
@@ -15,10 +15,11 @@ export default async function Product(props: any) {
 
     return (
         <div className="wrapper mt-10">
-            <Breadcrumbs lastLabel={product?.name} />
-            <div className="flex flex-col mt-10">
-                <ProductInfo name={product?.name} description={product?.description} price={product?.price} />
-                <ProductImage imageURL={product?.imageURL} />
+            <BreadcrumbsServer lastLabel={product?.name} />
+
+            <div className="flex mt-10 gap-1 flex-row items-stretch">
+                <ProductInfo name={product?.name} description={product?.description} price={product?.price} className={"flex-[50_1]"} />
+                <ProductImage imageURL={product?.imageURL} name={product?.name} className={"flex-[50_1] h-[600px]"} />
             </div>
         </div>
     );

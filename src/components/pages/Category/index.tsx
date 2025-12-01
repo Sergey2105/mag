@@ -1,5 +1,6 @@
 //серверный компонент
-import Breadcrumbs from "@/components/Breadcrumbs";
+import Breadcrumbs from "@/components/Breadcrumbs/BreadcrumbsClient";
+import BreadcrumbsServer from "@/components/Breadcrumbs/BreadcrumbsServer";
 import Filters from "@/components/Filters";
 import ProductList from "@/components/ProductList";
 import TopBar from "@/components/TopBar";
@@ -13,7 +14,7 @@ export default async function Category(props: any) {
     return (
         <>
             <div className="wrapper mt-10">
-                <Breadcrumbs className="mt-16" lastLabel={category?.name} />
+                <BreadcrumbsServer />
                 <Title text="Каталог" size="lg" className="mt-6" />
                 <div className="grid grid-cols-[256px_1fr] gap-8 mt-10">
                     <div className="h-full">

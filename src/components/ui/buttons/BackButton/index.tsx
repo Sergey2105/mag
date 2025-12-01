@@ -10,7 +10,7 @@ export function BackButton(props: { children?: React.ReactNode }) {
 
     return (
         <Button variant="outline" size="lg" onClick={() => router.back()}>
-            <ArrowLeft size={18} className="text-black dark:text-white" />
+            <ArrowLeft size={18} />
             {children}
         </Button>
     );
