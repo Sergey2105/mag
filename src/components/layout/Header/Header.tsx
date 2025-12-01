@@ -7,6 +7,8 @@ import Logo from "../../../shared/icon/Logo.svg";
 import { InputSearch } from "@/components/inputs/InputSearch";
 import { productServices } from "@/services/product.services";
 import { IProductWithCategory } from "@/types/product.interface";
+import { LinkList } from "@/components/layout/Header/LinkList";
+import { MenuMobile } from "@/components/layout/Header/MenuMobile";
 
 export function Header() {
     return (
@@ -28,8 +30,11 @@ export function Header() {
                         getItemHref={(product) => `/catalog/${product.category.slug}/${product.id}`}
                     />
                 </div>
-
-                <Menu />
+                <div className="hidden lg:flex flex gap-6 items-center">
+                    <LinkList className="flex items-center gap-12" />
+                    <Menu />
+                </div>
+                <MenuMobile />
             </div>
         </header>
     );

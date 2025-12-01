@@ -16,10 +16,11 @@ interface InputSearchProps<T> {
     renderItem: (item: T) => React.ReactNode;
     getItemKey: (item: T) => string | number;
     getItemHref: (item: T) => string;
+    transformation?: boolean;
 }
 
 export function InputSearch<T>(props: InputSearchProps<T>) {
-    const { className, onSearch, renderItem, getItemKey, getItemHref } = props;
+    const { className, onSearch, renderItem, getItemKey, getItemHref, transformation = false } = props;
     const [searchQuery, setSearchQuery] = useState("");
     const [inputValue, setInputValue] = useState("");
     const [focused, setFocused] = useState(false);
