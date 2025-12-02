@@ -9,6 +9,7 @@ import { productServices } from "@/services/product.services";
 import { IProductWithCategory } from "@/types/product.interface";
 import { LinkList } from "@/components/layout/Header/LinkList";
 import { MenuMobile } from "@/components/layout/Header/MenuMobile";
+import { SearchDialog } from "@/components/SearchDialog";
 
 export function Header() {
     return (
@@ -17,8 +18,8 @@ export function Header() {
                 <Link href="/" className="flex items-center gap-3">
                     <Logo className="text-black dark:text-white" />
                 </Link>
-                <div className="mx-10 flex-1">
-                    <InputSearch<IProductWithCategory>
+                <div className="hidden lg:flex gap-6 items-center">
+                    <SearchDialog<IProductWithCategory>
                         onSearch={(query) => productServices.getProductBySearch(query)}
                         renderItem={(product) => (
                             <>
@@ -29,8 +30,6 @@ export function Header() {
                         getItemKey={(product) => product.id}
                         getItemHref={(product) => `/catalog/${product.category.slug}/${product.id}`}
                     />
-                </div>
-                <div className="hidden lg:flex flex gap-6 items-center">
                     <LinkList className="flex items-center gap-12" />
                     <Menu />
                 </div>
