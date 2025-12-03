@@ -5,14 +5,19 @@ import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import { match } from "path-to-regexp";
 
-export function LinkList(props: { className?: string }) {
-    const { className } = props;
+interface LinkListProps {
+    className?: string;
+    onClick?: () => void;
+}
+
+export function LinkList(props: LinkListProps) {
+    const { className, onClick } = props;
     const pathname = usePathname();
 
     return (
         <nav className={cn("", className)}>
             {MENU.map((menuItem) => (
-                <MenuItem key={menuItem.name} menuItem={menuItem} isActive={!!match(menuItem.href)(pathname)} />
+                <MenuItem key={menuItem.name} menuItem={menuItem} isActive={!!match(menuItem.href)(pathname)} onClick={onClick} />
             ))}
         </nav>
     );

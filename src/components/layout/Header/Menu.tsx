@@ -25,7 +25,7 @@ export function Menu() {
                     </Button>
                 </Link>
             </nav>
-            <div className="flex items-center gap-2">
+            <div className="lg:flex items-center gap-2 hidden">
                 <LocaleSwitcher />
                 <ModeToggle />
             </div>

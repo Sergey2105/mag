@@ -18,22 +18,24 @@ export function Header() {
                 <Link href="/" className="flex items-center gap-3">
                     <Logo className="text-black dark:text-white" />
                 </Link>
-                <div className="hidden lg:flex gap-6 items-center">
-                    <SearchDialog<IProductWithCategory>
-                        onSearch={(query) => productServices.getProductBySearch(query)}
-                        renderItem={(product) => (
-                            <>
-                                <Image className="rounded-sm h-8 w-8" width={32} height={32} src={product.imageURL} alt={product.name} />
-                                <span>{product.name}</span>
-                            </>
-                        )}
-                        getItemKey={(product) => product.id}
-                        getItemHref={(product) => `/catalog/${product.category.slug}/${product.id}`}
-                    />
-                    <LinkList className="flex items-center gap-12" />
-                    <Menu />
+                <div className="flex items-center gap-6">
+                    <LinkList className="lg:flex items-center gap-12 hidden" />
+                    <div className="flex items-center gap-2">
+                        <SearchDialog<IProductWithCategory>
+                            onSearch={(query) => productServices.getProductBySearch(query)}
+                            renderItem={(product) => (
+                                <>
+                                    <Image className="rounded-sm h-8 w-8" width={32} height={32} src={product.imageURL} alt={product.name} />
+                                    <span>{product.name}</span>
+                                </>
+                            )}
+                            getItemKey={(product) => product.id}
+                            getItemHref={(product) => `/catalog/${product.category.slug}/${product.id}`}
+                        />
+                        <Menu />
+                        <MenuMobile className="lg:hidden" />
+                    </div>
                 </div>
-                <MenuMobile />
             </div>
         </header>
     );

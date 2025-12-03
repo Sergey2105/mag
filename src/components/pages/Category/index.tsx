@@ -16,14 +16,14 @@ export default async function Category(props: any) {
             <div className="wrapper mt-10">
                 <BreadcrumbsServer />
                 <Title text="Каталог" size="lg" className="mt-6" />
-                <div className="grid grid-cols-[256px_1fr] gap-8 mt-10">
+                <div className="grid grid-cols-1 md:grid-cols-[256px_1fr] gap-2 md:gap-8 mt-10">
                     <div className="h-full">
-                        <div className="sticky top-4">
+                        <div className="sticky top-4 w-full">
                             <Filters />
                         </div>
                     </div>
                     <div className="h-full">
-                        <TopBar count={products.length} />
+                        <TopBar />
                         <div className="mt-4">
                             <ProductList items={products} />
                         </div>

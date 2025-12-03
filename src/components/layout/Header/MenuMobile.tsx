@@ -8,11 +8,20 @@ import { ModeToggle } from "@/components/ModeToggle";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Logo from "../../../shared/icon/Logo.svg";
+import { cn } from "@/lib/utils";
+import { useState } from "react";
 
-export function MenuMobile() {
+interface MenuMobileProps {
+    className?: string;
+}
+
+export function MenuMobile(props: MenuMobileProps) {
+    const { className } = props;
+    const [open, setOpen] = useState<boolean>(false);
+
     return (
-        <div className="lg:hidden">
-            <Sheet>
+        <div className={cn("", className)}>
+            <Sheet open={open} onOpenChange={setOpen}>
                 <SheetTrigger asChild>
                     <Button variant="outline" size="icon">
                         <MenuIcon className="size-5" />
@@ -21,13 +30,13 @@ export function MenuMobile() {
                 <SheetContent side="left" className="w-75">
                     <SheetHeader>
                         <SheetTitle>
-                            <Link href="/" className="flex items-center gap-3">
+                            <Link href="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
                                 <Logo className="text-black dark:text-white" />
                             </Link>
                         </SheetTitle>
                     </SheetHeader>
                     <div className="flex flex-col gap-2.5 p-4 pt-0">
-                        <LinkList className="flex flex-col gap-4" />
+                        <LinkList className="flex flex-col gap-4" onClick={() => setOpen(false)} />
                     </div>
                     <SheetFooter>
                         <div className="flex justify-end gap-3">

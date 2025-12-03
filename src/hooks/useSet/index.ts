@@ -29,5 +29,9 @@ export function useSetState<T>(initial?: Iterable<T>) {
         setSet(new Set());
     }, []);
 
-    return { setValue: set, add, remove, toggle, reset };
+    const setAll = useCallback((items: Iterable<T>) => {
+        setSet(new Set(items));
+    }, []);
+
+    return { setValue: set, add, remove, toggle, reset, setAll };
 }
