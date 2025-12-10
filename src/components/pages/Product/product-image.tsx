@@ -6,7 +6,7 @@ import { Mousewheel, Pagination } from "swiper/modules";
 import styles from "./index.module.scss";
 
 export default function ProductImage(props: any) {
-    const { imageURL, name, className } = props;
+    const { images, name, className } = props;
 
     return (
         <div className={cn("h-full w-full", className)}>
@@ -22,25 +22,25 @@ export default function ProductImage(props: any) {
                 className="mySwiper h-full"
             >
                 <SwiperSlide>
-                    <Image src={imageURL} alt={name} width={600} height={600} objectFit="contain" className="object-center" />
+                    <Image src={images} alt={name} width={600} height={600} objectFit="contain" className="object-center" />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <Image src={imageURL} alt={name} width={600} height={600} objectFit="contain" className="object-center" />
+                    <Image src={images} alt={name} width={600} height={600} objectFit="contain" className="object-center" />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <Image src={imageURL} alt={name} width={600} height={600} objectFit="contain" className="object-center" />
+                    <Image src={images} alt={name} width={600} height={600} objectFit="contain" className="object-center" />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <Image src={imageURL} alt={name} width={600} height={600} objectFit="contain" className="object-center" />
+                    <Image src={images} alt={name} width={600} height={600} objectFit="contain" className="object-center" />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <Image src={imageURL} alt={name} width={600} height={600} objectFit="contain" className="object-center" />
+                    <Image src={images} alt={name} width={600} height={600} objectFit="contain" className="object-center" />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <Image src={imageURL} alt={name} width={600} height={600} objectFit="contain" className="object-center" />
+                    <Image src={images} alt={name} width={600} height={600} objectFit="contain" className="object-center" />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <Image src={imageURL} alt={name} width={600} height={600} objectFit="contain" className="object-center" />
+                    <Image src={images} alt={name} width={600} height={600} objectFit="contain" className="object-center" />
                 </SwiperSlide>
             </Swiper>
         </div>

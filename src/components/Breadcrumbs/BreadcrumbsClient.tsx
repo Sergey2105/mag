@@ -8,12 +8,11 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbP
 import { Fragment } from "react";
 import Link from "next/link";
 import { SlashIcon } from "lucide-react";
-import { Category } from "@prisma/client";
 
 interface BreadcrumbsClientProps {
     className?: string;
     lastLabel?: string;
-    categories: Category[];
+    categories: any[];
 }
 
 export default function BreadcrumbsClient(props: BreadcrumbsClientProps) {

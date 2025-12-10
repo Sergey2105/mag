@@ -1,8 +1,7 @@
 import CatalogItem from "@/components/CtalogItem";
-import { Category } from "@prisma/client";
 
 interface CatalogListProps {
-    list: Category[];
+    list: any[];
 }
 
 export default function CatalogList(props: CatalogListProps) {
@@ -10,7 +9,7 @@ export default function CatalogList(props: CatalogListProps) {
     return (
         <>
             {list.map((cat: any) => (
-                <CatalogItem key={cat.id} name={cat.name} imageURL={cat.imageURL} slug={cat.slug} />
+                <CatalogItem key={cat.id} name={cat.name} images={cat.images} slug={cat.slug} />
             ))}
         </>
     );

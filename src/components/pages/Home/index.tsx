@@ -17,7 +17,7 @@ export default function Home() {
                     <div className="flex flex-col gap-6 items-start">
                         <span className="text-[25px] text-white/80 font-semibold leading-8"> Pro.Beyond.</span>
                         <Title text="IPhone 14 Pro" size="2xl" className="text-white" />
-                        <span className="text-[18px] text-[#909090] font-medium leading-6">Created to change everything for the better. For everyone</span>
+                        <span className="text-[18px] text-[#909090] font-semibold leading-6">Created to change everything for the better. For everyone</span>
                         <Button variant="transparent" size="lg" asChild>
                             <Link href={PAGES.CATALOG.ROOT}> Shop Now</Link>
                         </Button>

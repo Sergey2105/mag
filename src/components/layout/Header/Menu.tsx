@@ -12,16 +12,19 @@ export function Menu() {
                 <Link href="/">
                     <Button variant="outline" size="icon">
                         <User className="size-5" />
+                        <span className="sr-only">Профиль</span>
                     </Button>
                 </Link>
                 <Link href="/">
                     <Button variant="outline" size="icon">
                         <Heart className="size-5" />
+                        <span className="sr-only">Избранное</span>
                     </Button>
                 </Link>
                 <Link href="/">
                     <Button variant="outline" size="icon">
                         <ShoppingCart className="size-5" />
+                        <span className="sr-only">Корзина</span>
                     </Button>
                 </Link>
             </nav>

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowDownWideNarrow, ArrowUpNarrowWide } from "lucide-react";
 import { parseAsString, useQueryState } from "nuqs";
 import { useRouter } from "next/navigation";
+import Filters from "@/components/Filters";
 
 export default function TopBar(props: any) {
     const { className, count } = props;
@@ -22,8 +23,11 @@ export default function TopBar(props: any) {
     };
 
     return (
-        <div className="flex justify-end w-full">
-            <div className="flex gap-2 flex-col md:flex-row w-full">
+        <div className="flex flex-col md:flex-row justify-end gap-2 w-full">
+            <div className="flex gap-2 flex-col md:flex-row">
+                <div>
+                    <Filters />
+                </div>
                 <div className="flex gap-2">
                     <Button className="flex-1 w-full" onClick={() => setSort("asc")}>
                         <ArrowDownWideNarrow className="size-5" />

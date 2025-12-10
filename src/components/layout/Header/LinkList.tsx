@@ -13,11 +13,12 @@ interface LinkListProps {
 export function LinkList(props: LinkListProps) {
     const { className, onClick } = props;
     const pathname = usePathname();
+    const rootSegment = "/" + pathname.split("/")[1];
 
     return (
         <nav className={cn("", className)}>
             {MENU.map((menuItem) => (
-                <MenuItem key={menuItem.name} menuItem={menuItem} isActive={!!match(menuItem.href)(pathname)} onClick={onClick} />
+                <MenuItem key={menuItem.name} menuItem={menuItem} isActive={!!match(menuItem.href)(rootSegment)} onClick={onClick} />
             ))}
         </nav>
     );

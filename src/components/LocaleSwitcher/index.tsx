@@ -22,6 +22,7 @@ export function LocaleSwitcher() {
             <DropdownMenuTrigger asChild>
                 <Button variant="outline" size="icon">
                     <Languages className="h-[1.2rem] w-[1.2rem] transition-all" />
+                    <span className="sr-only">Язык</span>
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">

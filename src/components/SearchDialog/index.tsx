@@ -40,6 +40,7 @@ export function SearchDialog<T>(props: SearchDialogProps<T>) {
         <>
             <Button variant="outline" size="icon" onClick={() => setOpen(true)}>
                 <Search className="w-4 h-4" />
+                <span className="sr-only">Поиск</span>
             </Button>
 
             <CommandDialog open={open} onOpenChange={setOpen}>

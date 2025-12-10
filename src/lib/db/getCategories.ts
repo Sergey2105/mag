@@ -1,20 +1,23 @@
-import prisma from "@/global/prisma/prisma-clint";
 import { unstable_cache } from "next/cache";
-//серверная функция
+
 export const getCategories = unstable_cache(
     async () => {
         try {
-            const categories = await prisma.category.findMany({
-                orderBy: { id: "asc" },
+            const res = await fetch("http://localhost:5000/category", {
+                method: "GET",
+                cache: "no-store",
             });
-            return categories;
+
+            if (!res.ok) throw new Error("Failed to fetch");
+
+            return await res.json();
         } catch (error) {
-            throw new Error("error fetching categories");
+            throw new Error("Error fetching categories from Nest");
         }
     },
-    ["categories"], // cache key
+    ["categories"], 
     {
-        revalidate: 3600, // 1 час
-        tags: ["categories"], // для ручной инвалидации
+        revalidate: 3600, 
+        tags: ["categories"],
     },
 );

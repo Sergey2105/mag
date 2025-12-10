@@ -25,7 +25,7 @@ export function Header() {
                             onSearch={(query) => productServices.getProductBySearch(query)}
                             renderItem={(product) => (
                                 <>
-                                    <Image className="rounded-sm h-8 w-8" width={32} height={32} src={product.imageURL} alt={product.name} />
+                                    <Image className="rounded-sm h-8 w-8" width={32} height={32} src={product.images} alt={product.name} />
                                     <span>{product.name}</span>
                                 </>
                             )}

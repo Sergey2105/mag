@@ -25,6 +25,7 @@ export function MenuMobile(props: MenuMobileProps) {
                 <SheetTrigger asChild>
                     <Button variant="outline" size="icon">
                         <MenuIcon className="size-5" />
+                        <span className="sr-only">Меню</span>
                     </Button>
                 </SheetTrigger>
                 <SheetContent side="left" className="w-75">
@@ -32,6 +33,7 @@ export function MenuMobile(props: MenuMobileProps) {
                         <SheetTitle>
                             <Link href="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
                                 <Logo className="text-black dark:text-white" />
+                                <span className="sr-only">Логотип</span>
                             </Link>
                         </SheetTitle>
                     </SheetHeader>

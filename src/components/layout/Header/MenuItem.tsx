@@ -15,7 +15,7 @@ export function MenuItem(props: Props) {
     const t = useTranslations("Navigation");
 
     return (
-        <Link className={cn("transition-colors text-[16px] font-medium", !isActive ? "opacity-60" : "text-black dark:text-white")} href={menuItem.href} onClick={onClick}>
+        <Link className={cn("transition-colors text-[16px] font-semibold", !isActive ? "opacity-60" : "text-black dark:text-white")} href={menuItem.href} onClick={onClick}>
             {t(menuItem.name)}
         </Link>
     );

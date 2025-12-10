@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { NextIntlClientProvider } from "next-intl";
@@ -9,8 +9,34 @@ import { ThemeProvider } from "@/providers/theme-provider";
 import { Header } from "@/components/layout/Header/Header";
 import QueryProvider from "@/providers/QueryProvider";
 
-const inter = Inter({
-    subsets: ["latin", "cyrillic"],
+const proximaNova = localFont({
+    src: [
+        {
+            path: "../shared/fonts/ProximaNova-Regular.woff2",
+            weight: "400",
+            style: "normal",
+            //font-normal
+        },
+        {
+            path: "../shared/fonts/ProximaNova-Medium.woff2",
+            weight: "500",
+            style: "normal",
+            //font-medium
+        },
+        {
+            path: "../shared/fonts/ProximaNova-Semibold.woff2",
+            weight: "600",
+            style: "normal",
+            //font-semibold
+        },
+        {
+            path: "../shared/fonts/ProximaNova-Semibold.woff2",
+            weight: "700",
+            style: "normal",
+            //font-bold
+        },
+    ],
+    variable: "--font-proxima",
     display: "swap",
 });
 
@@ -24,7 +50,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
     return (
         <html lang={locale} suppressHydrationWarning>
-            <body className={inter.className}>
+            <body className={proximaNova.className}>
                 <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
                     <NextIntlClientProvider>
                         <AllStoresProvider>
