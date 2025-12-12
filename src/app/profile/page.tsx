@@ -1,9 +1,8 @@
-import ProfilePage from "@/components/pages/ProfilePage";
-import TokenHandler from "@/untils/TokenHandler";
 import { Suspense } from "react";
+import TokenHandler from "@/untils/TokenHandler";
+import ProfilePage from "@/components/pages/ProfilePage";
 
 export default async function Profile() {
-    // const profile = await getUserProfile();
     return (
         <>
             <Suspense fallback={null}>

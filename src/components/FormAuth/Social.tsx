@@ -15,7 +15,7 @@ export default function Social(props: SocialProps) {
 
     return (
         <div className={cn("", className)}>
-            <Button variant="outline" className="w-full" onClick={() => openPopup(`${process.env.NEXT_PUBLIC_API_URL}/auth/google`)}>
+            <Button variant="outline" className="w-full" onClick={() => openPopup(`${process.env.NEXT_PUBLIC_API_URL}/auth/google?prompt=select_account`)}>
                 <Google className="size-5" />
                 Войти с Google
             </Button>

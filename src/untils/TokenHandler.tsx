@@ -29,25 +29,21 @@ export default function TokenHandler() {
     const router = useRouter();
 
     useEffect(() => {
-        // 1) Попытка взять токен из URL (для мобильных)
         const accessToken = searchParams.get("accessToken");
-        if (accessToken) {
-            saveTokenStorage(accessToken);
+        if (!accessToken) return;
+
+        // Сохраняем токен через auth-token.service
+        saveTokenStorage(accessToken);
+
+        if (window.opener && !window.opener.closed) {
+            // Desktop popup: передаем токен родителю и закрываем
+            window.opener.postMessage({ type: "oauth_token", token: accessToken }, "*");
+            setTimeout(() => window.close(), 100);
+        } else {
+            // Mobile / обычная вкладка: чистим URL и редиректим
+            window.history.replaceState({}, "", window.location.pathname);
             router.replace("/profile");
-            return;
         }
-
-        // 2) Ожидание токена через postMessage (popup)
-        const handler = (event: MessageEvent) => {
-            if (event.data?.type === "oauth_token" && event.data.token) {
-                saveTokenStorage(event.data.token);
-                router.replace("/profile");
-            }
-        };
-
-        window.addEventListener("message", handler);
-
-        return () => window.removeEventListener("message", handler);
     }, [searchParams, router]);
 
     return null;

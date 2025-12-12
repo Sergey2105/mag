@@ -1,33 +1,53 @@
-import { useCallback } from "react";
+"use client";
+import { useCallback, useRef } from "react";
+import { saveTokenStorage, EnumTokens } from "@/services/auth/auth-token.service";
 
 export function useOAuthPopup() {
-    const openPopup = useCallback((url: string, name = "oauth_popup") => {
+    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+    const openPopup = useCallback((url: string) => {
         const width = 500;
         const height = 650;
-
-        const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-        // На телефонах popup невозможен → открываем вкладку
-        if (isMobile) {
-            window.open(url, "_blank");
-            return;
-        }
-
-        // Центрированное popup окно
         const left = window.screenX + (window.outerWidth - width) / 2;
         const top = window.screenY + (window.outerHeight - height) / 2;
 
-        const popup = window.open(
-            url,
-            name,
-            `popup=yes,toolbar=no,location=no,status=no,menubar=no,
-      scrollbars=yes,resizable=no,
-      width=${width},height=${height},top=${top},left=${left}`,
-        );
+        const popup = window.open(url, "oauth_popup", `width=${width},height=${height},top=${top},left=${left}`);
 
         if (!popup) {
-            alert("Браузер блокирует popup. Разреши окна.");
+            alert("Разрешите popup-окна для входа через социальные сети");
+            return;
         }
+
+        const handler = (event: MessageEvent) => {
+
+            if (event.data?.type === "oauth_token" && event.data.token) {
+                saveTokenStorage(event.data.token);
+                window.removeEventListener("message", handler);
+                if (timeoutRef.current) {
+                    clearTimeout(timeoutRef.current);
+                }
+                window.dispatchEvent(new CustomEvent("auth_update"));
+                window.location.href = "/profile";
+            }
+        };
+
+        window.addEventListener("message", handler);
+
+        // Автоматическое закрытие обработчика через 5 минут
+        timeoutRef.current = setTimeout(
+            () => {
+                window.removeEventListener("message", handler);
+            },
+            5 * 60 * 1000,
+        );
+
+        // Возвращаем функцию для очистки
+        return () => {
+            window.removeEventListener("message", handler);
+            if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current);
+            }
+        };
     }, []);
 
     return openPopup;
