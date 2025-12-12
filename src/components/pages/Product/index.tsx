@@ -1,13 +1,12 @@
 import BreadcrumbsServer from "@/components/Breadcrumbs/BreadcrumbsServer";
 import ProductImage from "@/components/pages/Product/product-image";
 import ProductInfo from "@/components/pages/Product/product-info";
-// import { getProductByID } from "@/lib/db/getProduct";
+import { getProductByIdServer } from "@/lib/db/getProducts";
 import { notFound } from "next/navigation";
 
 export default async function Product(props: any) {
     const { id } = props;
-    // const product = await getProductByID(id);
-    const product: any = [];
+    const product = await getProductByIdServer(id);
 
     console.log(product);
 

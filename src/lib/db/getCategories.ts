@@ -1,6 +1,6 @@
 import { unstable_cache } from "next/cache";
 
-export const getCategories = unstable_cache(
+export const getCategoriesServer = unstable_cache(
     async () => {
         try {
             const res = await fetch("http://localhost:5000/category", {

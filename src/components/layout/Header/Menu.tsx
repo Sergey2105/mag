@@ -1,6 +1,7 @@
 "use client";
 import { LocaleSwitcher } from "@/components/LocaleSwitcher";
 import { ModeToggle } from "@/components/ModeToggle";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Heart, ShoppingCart, User } from "lucide-react";
 import Link from "next/link";
@@ -9,7 +10,7 @@ export function Menu() {
     return (
         <div className="flex items-center gap-2">
             <nav className="flex items-center gap-2">
-                <Link href="/">
+                <Link href="/auth">
                     <Button variant="outline" size="icon">
                         <User className="size-5" />
                         <span className="sr-only">Профиль</span>
@@ -21,10 +22,11 @@ export function Menu() {
                         <span className="sr-only">Избранное</span>
                     </Button>
                 </Link>
-                <Link href="/">
+                <Link href="/" className="relative w-fit">
                     <Button variant="outline" size="icon">
                         <ShoppingCart className="size-5" />
                         <span className="sr-only">Корзина</span>
+                        <Badge className="absolute -top-2.5 -right-2.5 h-5 min-w-5 px-1 tabular-nums">8</Badge>
                     </Button>
                 </Link>
             </nav>

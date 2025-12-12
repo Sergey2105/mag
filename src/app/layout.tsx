@@ -8,6 +8,7 @@ import { AllStoresProvider } from "@/providers/AllStoresProvider";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { Header } from "@/components/layout/Header/Header";
 import QueryProvider from "@/providers/QueryProvider";
+import { SITE_DESCRIPTION, SITE_NAME } from "@/constants/seo.constants";
 
 const proximaNova = localFont({
     src: [
@@ -41,8 +42,11 @@ const proximaNova = localFont({
 });
 
 export const metadata: Metadata = {
-    title: "Next Store",
-    description: "Next Store mobile",
+    title: {
+        absolute: SITE_NAME,
+        template: `%s | ${SITE_NAME}`,
+    },
+    description: SITE_DESCRIPTION,
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {

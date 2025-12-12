@@ -29,6 +29,15 @@ const nextConfig: NextConfig = {
 
         return config;
     },
+
+    async rewrites() {
+        return [
+            {
+                source: "/uploads/:path*",
+                destination: `${process.env.NEXT_PUBLIC_API_URL}/uploads/:path*`,
+            },
+        ];
+    },
 };
 
 const withNextIntl = createNextIntlPlugin();

@@ -3,14 +3,12 @@ import BreadcrumbsServer from "@/components/Breadcrumbs/BreadcrumbsServer";
 import ProductList from "@/components/ProductList";
 import TopBar from "@/components/TopBar";
 import { Title } from "@/components/ui/title";
-import { getProductBySlug } from "@/lib/db/getProducts";
+import { getProductBySlugServer } from "@/lib/db/getProducts";
 
-export default async function Category(props: any) {
+export default async function CategoryPage(props: any) {
     const { slug } = props;
 
-    const { category, pagination, products } = await getProductBySlug(slug);
-
-    console.log(category, pagination, products);
+    const { category, pagination, products } = await getProductBySlugServer(slug);
 
     return (
         <>

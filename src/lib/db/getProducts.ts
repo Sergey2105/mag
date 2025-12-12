@@ -1,18 +1,17 @@
 import { unstable_cache } from "next/cache";
 
-export const getProducts = unstable_cache(
+import axios from "axios";
+
+export const getProductsServer = unstable_cache(
     async () => {
         try {
-            const res = await fetch("http://localhost:5000/products", {
-                method: "GET",
-                cache: "no-store",
+            const res = await axios.get("http://localhost:5000/products", {
+                withCredentials: false,
             });
 
-            if (!res.ok) throw new Error("Failed to fetch");
-
-            return await res.json();
+            return res.data;
         } catch (error) {
-            throw new Error("Error fetching categories from Nest");
+            throw new Error("Error fetching products from Nest");
         }
     },
     ["products"],
@@ -22,14 +21,38 @@ export const getProducts = unstable_cache(
     },
 );
 
-export async function getProductBySlug(slug: string) {
-    const res = await fetch(`http://localhost:5000/products/category/${slug}`, {
-        cache: "no-store",
-    });
+export const getProductByIdServer = unstable_cache(
+    async (id: string) => {
+        try {
+            const res = await axios.get(`http://localhost:5000/products/${id}`, {
+                withCredentials: false,
+            });
 
-    if (!res.ok) {
-        throw new Error("Failed to fetch product");
-    }
+            return res.data;
+        } catch (error) {
+            throw new Error("Error fetching product by ID from Nest");
+        }
+    },
+    ["product-by-id"],
+    {
+        revalidate: 3600,
+        tags: ["products"],
+    },
+);
 
-    return res.json();
-}
+export const getProductBySlugServer = unstable_cache(
+    async (slug: string) => {
+        try {
+            const res = await axios.get(`http://localhost:5000/products/category/${slug}`);
+
+            return res.data;
+        } catch (error: any) {
+            throw new Error("Failed to fetch product by slug");
+        }
+    },
+    ["product-by-slug"],
+    {
+        revalidate: 3600,
+        tags: ["products"],
+    },
+);

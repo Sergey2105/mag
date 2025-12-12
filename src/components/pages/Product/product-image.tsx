@@ -5,8 +5,16 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Mousewheel, Pagination } from "swiper/modules";
 import styles from "./index.module.scss";
 
-export default function ProductImage(props: any) {
+interface ProductImageProps {
+    images: string[];
+    name: string;
+    className?: string;
+}
+
+export default function ProductImage(props: ProductImageProps) {
     const { images, name, className } = props;
+
+    console.log(images);
 
     return (
         <div className={cn("h-full w-full", className)}>
@@ -21,27 +29,12 @@ export default function ProductImage(props: any) {
                 modules={[Mousewheel, Pagination]}
                 className="mySwiper h-full"
             >
-                <SwiperSlide>
-                    <Image src={images} alt={name} width={600} height={600} objectFit="contain" className="object-center" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <Image src={images} alt={name} width={600} height={600} objectFit="contain" className="object-center" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <Image src={images} alt={name} width={600} height={600} objectFit="contain" className="object-center" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <Image src={images} alt={name} width={600} height={600} objectFit="contain" className="object-center" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <Image src={images} alt={name} width={600} height={600} objectFit="contain" className="object-center" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <Image src={images} alt={name} width={600} height={600} objectFit="contain" className="object-center" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <Image src={images} alt={name} width={600} height={600} objectFit="contain" className="object-center" />
-                </SwiperSlide>
+                {images &&
+                    images.map((el, i) => (
+                        <SwiperSlide>
+                            <Image src={el} alt={name} width={600} height={600} objectFit="contain" className="object-center" />
+                        </SwiperSlide>
+                    ))}
             </Swiper>
         </div>
     );

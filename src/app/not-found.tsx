@@ -9,7 +9,7 @@ export default async function NotFound() {
     const t = await getTranslations("NotFound");
 
     return (
-        <div className="h-full from-gray-50 to-gray-100 flex items-center justify-center">
+        <div className="wrapper h-full flex items-center justify-center mt-10">
             <div className="max-w-md w-full text-center">
                 <div className="relative mb-8">
                     <h1 className="text-9xl font-bold text-gray-200 select-none">404</h1>
@@ -31,7 +31,7 @@ export default async function NotFound() {
 
                     <BackButton>{t("back")}</BackButton>
                 </div>
-                <div className="mt-8  pt-8 border-t border-gray-200">
+                <div className="mt-8 pt-8 border-t border-gray-200">
                     <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">{t("popularity")}</p>
                     <div className="flex flex-wrap gap-2 justify-center">
                         <Badge variant="secondary" asChild>

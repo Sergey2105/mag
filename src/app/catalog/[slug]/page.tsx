@@ -1,4 +1,4 @@
-import Category from "@/components/pages/Category";
+import Category from "@/components/pages/CategoryPage";
 import Link from "next/link";
 
 interface Props {

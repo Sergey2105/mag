@@ -13,7 +13,7 @@ export default function Filters() {
     return (
         <>
             <div className="sm:hidden">
-                <Button onClick={() => setIsOpen(true)} className="w-full">
+                <Button onClick={() => setIsOpen(true)} className="w-full" variant="outline">
                     <Funnel className="size-5" /> Фильтры
                 </Button>
                 <Drawer open={isOpen} onOpenChange={setIsOpen}>
@@ -29,7 +29,7 @@ export default function Filters() {
             <div className="hidden sm:block">
                 <Popover>
                     <PopoverTrigger asChild>
-                        <Button className="w-full">
+                        <Button className="w-full" variant="outline">
                             <Funnel className="size-5" /> Фильтры
                         </Button>
                     </PopoverTrigger>

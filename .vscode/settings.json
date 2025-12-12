@@ -3,5 +3,9 @@
     "javascript.preferences.importModuleSpecifier": "non-relative",
     "path-intellisense.mappings": {
         "@": "${workspaceRoot}/src"
+    },
+    "workbench.editor.customLabels.patterns": {
+        "**/app/**/{page,layout,index}.{ts,tsx}": "(${dirname})/${filename}.${extname}",
+        "**/index.{ts,tsx}": "${dirname}/index.${extname}"
     }
 }

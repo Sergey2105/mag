@@ -1,10 +1,10 @@
 import BreadcrumbsServer from "@/components/Breadcrumbs/BreadcrumbsServer";
-import CatalogContent from "@/components/pages/Catalog/catalogContent";
-import CatalogSkeleton from "@/components/pages/Catalog/catalogSkeleton";
+import CatalogContent from "@/components/pages/CatalogPage/catalogContent";
+import CatalogSkeleton from "@/components/pages/CatalogPage/catalogSkeleton";
 import { Title } from "@/components/ui/title";
 import { Suspense } from "react";
 
-export default function Catalog() {
+export default function CatalogPage() {
     return (
         <div className="wrapper mt-10">
             <BreadcrumbsServer />

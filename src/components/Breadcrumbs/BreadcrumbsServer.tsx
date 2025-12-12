@@ -1,5 +1,5 @@
 import BreadcrumbsClient from "@/components/Breadcrumbs/BreadcrumbsClient";
-import { getCategories } from "@/lib/db/getCategories";
+import { getCategoriesServer } from "@/lib/db/getCategories";
 
 interface BreadcrumbsServerProps {
     className?: string;
@@ -7,7 +7,7 @@ interface BreadcrumbsServerProps {
 }
 export default async function BreadcrumbsServer(props: BreadcrumbsServerProps) {
     const { className, lastLabel } = props;
-    const categories = await getCategories();
+    const categories = await getCategoriesServer();
 
     return <BreadcrumbsClient className={className} lastLabel={lastLabel} categories={categories} />;
 }

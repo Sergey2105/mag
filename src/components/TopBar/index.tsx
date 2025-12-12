@@ -29,11 +29,11 @@ export default function TopBar(props: any) {
                     <Filters />
                 </div>
                 <div className="flex gap-2">
-                    <Button className="flex-1 w-full" onClick={() => setSort("asc")}>
+                    <Button className="flex-1 w-full" onClick={() => setSort("asc")} variant="outline">
                         <ArrowDownWideNarrow className="size-5" />
                         Дешевле
                     </Button>
-                    <Button className="flex-1 w-full" onClick={() => setSort("desc")}>
+                    <Button className="flex-1 w-full" onClick={() => setSort("desc")} variant="outline">
                         <ArrowUpNarrowWide className="size-5" />
                         Дороже
                     </Button>

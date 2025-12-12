@@ -4,12 +4,13 @@ import { Menu } from "@/components/layout/Header/Menu";
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "../../../shared/icon/Logo.svg";
-import { InputSearch } from "@/components/inputs/InputSearch";
-import { productServices } from "@/services/product.services";
-import { IProductWithCategory } from "@/types/product.interface";
+import { productServices } from "@/services/db/product.services";
 import { LinkList } from "@/components/layout/Header/LinkList";
 import { MenuMobile } from "@/components/layout/Header/MenuMobile";
 import { SearchDialog } from "@/components/SearchDialog";
+import { IProduct } from "@/types/product.interface";
+import { categoryServices } from "@/services/db/category.services";
+import { ICategory } from "@/types/category.interface";
 
 export function Header() {
     return (
@@ -21,16 +22,30 @@ export function Header() {
                 <div className="flex items-center gap-6">
                     <LinkList className="lg:flex items-center gap-12 hidden" />
                     <div className="flex items-center gap-2">
-                        <SearchDialog<IProductWithCategory>
+                        <SearchDialog<IProduct, ICategory>
                             onSearch={(query) => productServices.getProductBySearch(query)}
                             renderItem={(product) => (
                                 <>
-                                    <Image className="rounded-sm h-8 w-8" width={32} height={32} src={product.images} alt={product.name} />
+                                    <Image className="rounded-sm h-8 w-8" width={32} height={32} src={product.images[0]} alt={product.name} />
                                     <span>{product.name}</span>
                                 </>
                             )}
                             getItemKey={(product) => product.id}
                             getItemHref={(product) => `/catalog/${product.category.slug}/${product.id}`}
+                            searchLabel="Найденные товары"
+                            placeholder="Поиск товаров..."
+                            initialData={{
+                                onSearch: () => categoryServices.getCategory(),
+                                renderItem: (category) => (
+                                    <>
+                                        <Image className="rounded-sm h-8 w-8" width={32} height={32} src={category.images} alt={category.name} />
+                                        <span className="font-medium">{category.name}</span>
+                                    </>
+                                ),
+                                getItemKey: (category) => category.id,
+                                getItemHref: (category) => `/catalog/${category.slug}`,
+                                searchLabel: "Категории",
+                            }}
                         />
                         <Menu />
                         <MenuMobile className="lg:hidden" />

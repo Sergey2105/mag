@@ -12,17 +12,11 @@ class ProductServices {
         return axios.get<IProductWithCategory>(`${this.URL}/${id}`);
     };
 
-    // getProductBySearch(search: string) {
-    //     return axios.get<IProductWithCategory[]>(this.URL, {
-    //         params: { query: search },
-    //     });
-    // }
-
     //products
     getProductBySearch(search: string) {
         return axios
             .get<{ products: IProductWithCategory[] }>(this.URL, {
-                params: { query: search },
+                params: { search: search },
             })
             .then((response) => ({
                 ...response,
