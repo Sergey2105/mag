@@ -7,10 +7,8 @@ const PROTECTED_ROUTES = ["/dashboard", "/profile"];
 
 function startsWithAny(path: string, list: string[]) {
     return list.some((route) => {
-        // Точное совпадение для корня
         if (route === "/" && path === "/") return true;
         if (route === "/") return false;
-        // Проверка начала пути
         return path === route || path.startsWith(route + "/");
     });
 }

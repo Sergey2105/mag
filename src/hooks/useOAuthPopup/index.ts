@@ -19,7 +19,6 @@ export function useOAuthPopup() {
         }
 
         const handler = (event: MessageEvent) => {
-
             if (event.data?.type === "oauth_token" && event.data.token) {
                 saveTokenStorage(event.data.token);
                 window.removeEventListener("message", handler);
