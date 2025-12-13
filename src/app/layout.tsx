@@ -2,13 +2,10 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
-import { NextIntlClientProvider } from "next-intl";
-import { getLocale } from "next-intl/server";
-import { AllStoresProvider } from "@/providers/AllStoresProvider";
-import { ThemeProvider } from "@/providers/theme-provider";
+import { getLocale, getMessages } from "next-intl/server";
 import { Header } from "@/components/layout/Header/Header";
-import QueryProvider from "@/providers/QueryProvider";
 import { SITE_DESCRIPTION, SITE_NAME } from "@/constants/seo.constants";
+import { Providers } from "@/app/Providers";
 
 const proximaNova = localFont({
     src: [
@@ -51,22 +48,17 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
     const locale = await getLocale();
+    const messages = await getMessages();
 
     return (
         <html lang={locale} suppressHydrationWarning>
             <body className={proximaNova.className}>
-                <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-                    <NextIntlClientProvider>
-                        <AllStoresProvider>
-                            <QueryProvider>
-                                <main className="min-h-screen">
-                                    <Header />
-                                    <NuqsAdapter>{children}</NuqsAdapter>
-                                </main>
-                            </QueryProvider>
-                        </AllStoresProvider>
-                    </NextIntlClientProvider>
-                </ThemeProvider>
+                <Providers locale={locale} messages={messages}>
+                    <main className="min-h-screen">
+                        <Header />
+                        <NuqsAdapter>{children}</NuqsAdapter>
+                    </main>
+                </Providers>
             </body>
         </html>
     );

@@ -1,4 +1,4 @@
-import FormAuth from "@/components/FormAuth/FormAuth";
+import FormAuth from "@/app/auth/form/FormAuth";
 
 export default async function AuthPage(props: any) {
     return (
