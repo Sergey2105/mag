@@ -1,14 +1,13 @@
-import { AuthPageWrapper } from "@/app/auth/AuthPageWrapper";
 import FormAuth from "@/app/auth/form/FormAuth";
 
-interface Props {
+interface AuthPageProps {
     isLogin: boolean;
 }
 
-export function AuthPage({ isLogin }: Props) {
+export function AuthPage({ isLogin }: AuthPageProps) {
     return (
-        <AuthPageWrapper>
+        <div className="wrapper">
             <FormAuth isLogin={isLogin} />
-        </AuthPageWrapper>
+        </div>
     );
 }

@@ -1,4 +1,4 @@
-import CatalogList from "@/components/CatalogList";
+import CatalogList from "@/components/elements/CatalogList";
 import { getCategoriesServer } from "@/lib/db/getCategories";
 
 export default async function CatalogContent() {

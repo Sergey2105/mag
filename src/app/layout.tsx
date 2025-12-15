@@ -5,7 +5,7 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { getLocale, getMessages } from "next-intl/server";
 import { Header } from "@/components/layout/Header/Header";
 import { SITE_DESCRIPTION, SITE_NAME } from "@/constants/seo.constants";
-import { Providers } from "@/app/Providers";
+import { Providers } from "@/providers/Providers";
 
 const proximaNova = localFont({
     src: [

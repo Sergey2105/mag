@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { BackButton } from "@/components/ui/buttons/BackButton";
 import { getTranslations } from "next-intl/server";
+import { DASHBOARD_PAGES, PUBLIC_PAGES } from "@/constants/routes";
 
 export default async function NotFound() {
     const t = await getTranslations("NotFound");
@@ -23,7 +24,7 @@ export default async function NotFound() {
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                     <Button variant="outline" size="lg" asChild>
-                        <Link href="/" className="">
+                        <Link href={PUBLIC_PAGES.HOME}>
                             <Home size={18} className="text-black dark:text-white" />
                             {t("home")}
                         </Link>
@@ -35,13 +36,13 @@ export default async function NotFound() {
                     <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">{t("popularity")}</p>
                     <div className="flex flex-wrap gap-2 justify-center">
                         <Badge variant="secondary" asChild>
-                            <Link href="/">{t("contact")}</Link>
+                            <Link href={PUBLIC_PAGES.CONTACTS}>{t("contact")}</Link>
                         </Badge>
                         <Badge variant="secondary" asChild>
-                            <Link href="/">{t("about")}</Link>
+                            <Link href={PUBLIC_PAGES.ABOUT}>{t("about")}</Link>
                         </Badge>
                         <Badge variant="secondary" asChild>
-                            <Link href="/">{t("profile")}</Link>
+                            <Link href={DASHBOARD_PAGES.PROFILE}>{t("profile")}</Link>
                         </Badge>
                     </div>
                 </div>

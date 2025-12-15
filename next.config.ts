@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
     output: "standalone",
 
     images: {
-        domains: ["funko.com"],
+        domains: ["funko.com", "github.com", "avatars.yandex.net"],
         remotePatterns: [
             {
                 protocol: "https",

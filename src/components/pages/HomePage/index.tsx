@@ -5,11 +5,9 @@ import { useTranslations } from "next-intl";
 import Phone from "@/shared/img/Phone.png";
 import Image from "next/image";
 import Link from "next/link";
-import { PAGES } from "@/constants/routes";
-import { PUBLIC_PAGES } from "@/config/pages/public.config";
-import { DASHBOARD_PAGES } from "@/config/pages/dashboard.config";
-import { PREMIUM_PAGES } from "@/config/pages/premium.config";
-import { ADMIN_PAGES } from "@/config/pages/admin.config";
+import { ADMIN_PAGES, DASHBOARD_PAGES, PREMIUM_PAGES, PUBLIC_PAGES } from "@/constants/routes";
+import { useQuery } from "@tanstack/react-query";
+import { categoryServices } from "@/services/db/category.services";
 
 const pages = [PUBLIC_PAGES.LOGIN, DASHBOARD_PAGES.PROFILE, PREMIUM_PAGES.HOME, ADMIN_PAGES.HOME, ADMIN_PAGES.MANAGER];
 

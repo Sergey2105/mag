@@ -3,7 +3,6 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Mousewheel, Pagination } from "swiper/modules";
-import styles from "./index.module.scss";
 
 interface ProductImageProps {
     images: string[];

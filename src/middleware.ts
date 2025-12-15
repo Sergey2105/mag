@@ -1,12 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { ADMIN_PAGES } from "./config/pages/admin.config";
-import { DASHBOARD_PAGES } from "./config/pages/dashboard.config";
-import { PREMIUM_PAGES } from "./config/pages/premium.config";
-import { PUBLIC_PAGES } from "./config/pages/public.config";
 import { protectLoginPages } from "@/server-actions/middlewares/protect-login.middleware";
 import { protectPremiumPages } from "@/server-actions/middlewares/protect-premium.middleware";
 import { protectAdminPages } from "@/server-actions/middlewares/protect-admin.middleware";
 import { protectDashboardPages } from "@/server-actions/middlewares/protect-dashboard.middleware";
+import { ADMIN_PAGES, DASHBOARD_PAGES, PREMIUM_PAGES, PUBLIC_PAGES } from "@/constants/routes";
 
 export async function middleware(request: NextRequest): Promise<NextResponse> {
     const pathname = request.nextUrl.pathname;

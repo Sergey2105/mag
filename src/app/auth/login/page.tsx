@@ -1,10 +1,10 @@
-import type { Metadata } from 'next'
-import { AuthPage } from '../AuthPage'
+import type { Metadata } from "next";
+import { AuthPage } from "../AuthPage";
 
 export const metadata: Metadata = {
-	title: 'Sign In'
-}
+    title: "Вход в личный кабинет",
+};
 
 export default function LoginPage() {
-	return <AuthPage isLogin />
+    return <AuthPage isLogin />;
 }

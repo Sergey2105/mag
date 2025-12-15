@@ -2,10 +2,10 @@
 
 import { type NextRequest, NextResponse } from 'next/server'
 
-import { ADMIN_PAGES } from '@/config/pages/admin.config'
 import { getTokensFromRequest } from './utils/get-tokens-from-request'
 import { jwtVerifyServer } from './utils/jwt-verify'
 import { redirectToLoginOrNotFound } from './utils/redirect-to-login-or-404'
+import { ADMIN_PAGES } from '@/constants/routes'
 
 export async function protectAdminPages(request: NextRequest) {
 	const tokens = await getTokensFromRequest(request)

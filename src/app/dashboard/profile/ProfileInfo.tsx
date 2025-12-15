@@ -1,5 +1,5 @@
 "use client";
-import { PUBLIC_PAGES } from "@/config/pages/public.config";
+import { PUBLIC_PAGES } from "@/constants/routes";
 import { useProfile } from "@/hooks/useProfile";
 import authService from "@/services/auth/auth.service";
 import { useMutation } from "@tanstack/react-query";
@@ -13,6 +13,8 @@ export function ProfileInfo() {
     const router = useRouter();
 
     const { isLoading, refetch, user } = useProfile();
+
+    console.log(user);
 
     const [isPending, startTransition] = useTransition();
 

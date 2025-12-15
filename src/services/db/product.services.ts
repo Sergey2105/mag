@@ -2,7 +2,7 @@ import { IProductWithCategory } from "@/types/product.interface";
 import axios from "axios";
 //клиентская
 class ProductServices {
-    private URL = `${process.env.NEXT_PUBLIC_API_URL}/products`;
+    private URL = `${process.env.NEXT_PUBLIC_API_URL}/api/products`;
     //products and category
     getProduct = () => {
         return axios.get<IProductWithCategory[]>(this.URL);
