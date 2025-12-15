@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import Filters from "@/components/Filters";
 
 export default function TopBar(props: any) {
-    const { className, count } = props;
+    const { className } = props;
     const router = useRouter();
 
     const [sort, setSort] = useQueryState(

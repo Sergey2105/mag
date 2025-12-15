@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
 import { useDebounce } from "@/hooks/useDebouce";
 import { useQuery } from "@tanstack/react-query";
-import Loader from "@/components/Loader";
+import Loader from "@/components/ui/Loader";
 import Link from "next/link";
 import { AxiosResponse } from "axios";
 

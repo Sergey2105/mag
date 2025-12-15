@@ -2,11 +2,9 @@
 
 import * as React from "react";
 import { Languages } from "lucide-react";
-import { useTheme } from "next-themes";
-
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { setUserLocale } from "@/services/locale";
+import { setUserLocale } from "@/services/locale.services";
 import { Locale } from "@/i18n/config";
 import { useLanguagesSwitcherData } from "@/hooks/useLanguagesSwitcherData";
 

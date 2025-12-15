@@ -1,6 +1,6 @@
 //серверный компонент
 import BreadcrumbsServer from "@/components/Breadcrumbs/BreadcrumbsServer";
-import ProductList from "@/components/ProductList";
+import ProductList from "@/components/elements/ProductList";
 import TopBar from "@/components/TopBar";
 import { Title } from "@/components/ui/title";
 import { getProductBySlugServer } from "@/lib/db/getProducts";

@@ -1,3 +1,4 @@
+import ProductControls from "@/components/ProductControls";
 import { cn } from "@/lib/utils";
 
 export default async function ProductInfo(props: any) {
@@ -12,7 +13,7 @@ export default async function ProductInfo(props: any) {
             </div>
             <div className="pt-6">
                 <p className="text-[32px] font-semibold">{price}</p>
-                <div>В корзину</div>
+                <ProductControls />
             </div>
             <div className="py-6">
                 <p className="text-[18px] font-normal text-neutral-400">Описание:</p>

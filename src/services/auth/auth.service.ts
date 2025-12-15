@@ -1,35 +1,54 @@
-import { IAuthForm, IAuthResponse } from "@/types/auth.types";
-import { saveTokenStorage, removeFromStorage } from "./auth-token.service";
-import { axiosClassic } from "@/app/api/api.interseptor";
+import { IFormData } from '@/types/auth.types'
+import { IUser } from '@/types/user.types'
+import authTokenService from './auth-token.service'
+import { axiosClassic } from '@/app/api/axios'
 
-export const authService = {
-    async main(type: "login" | "register", data: IAuthForm) {
-        const response = await axiosClassic.post<IAuthResponse>(`/auth/${type}`, data);
+interface IAuthResponse {
+	user: IUser
+	accessToken: string
+}
 
-        if (response.data.accessToken) {
-            saveTokenStorage(response.data.accessToken);
-        }
+class AuthService {
+	async main(
+		type: 'login' | 'register',
+		data: IFormData,
+		recaptchaToken?: string | null
+	) {
+		const response = await axiosClassic.post<IAuthResponse>(
+			`/auth/${type}`,
+			data,
+			{
+				headers: {
+					recaptcha: recaptchaToken
+				}
+			}
+		)
 
-        return response;
-    },
+		if (response.data.accessToken) {
+			authTokenService.saveAccessToken(response.data.accessToken)
+		}
 
-    async getNewToken() {
-        const response = await axiosClassic.post<IAuthResponse>("/auth/login/access-token");
+		return response
+	}
 
-        if (response.data.accessToken) {
-            saveTokenStorage(response.data.accessToken);
-        }
+	async getNewTokens() {
+		const response = await axiosClassic.post<IAuthResponse>(
+			'/auth/access-token'
+		)
 
-        return response;
-    },
+		if (response.data.accessToken)
+			authTokenService.saveAccessToken(response.data.accessToken)
 
-    async logout() {
-        const response = await axiosClassic.post<boolean>("/auth/logout");
+		return response
+	}
 
-        if (response.data) {
-            removeFromStorage();
-        }
+	async logout() {
+		const response = await axiosClassic.post<boolean>('/auth/logout')
 
-        return response;
-    },
-};
+		if (response.data) authTokenService.removeAccessToken()
+
+		return response
+	}
+}
+
+export default new AuthService()

@@ -8,6 +8,7 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbP
 import { Fragment } from "react";
 import Link from "next/link";
 import { SlashIcon } from "lucide-react";
+import { PUBLIC_PAGES } from "@/constants/routes";
 
 interface BreadcrumbsClientProps {
     className?: string;
@@ -42,7 +43,7 @@ export default function BreadcrumbsClient(props: BreadcrumbsClientProps) {
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <Link href="/">{t("Home")}</Link>
+                        <Link href={PUBLIC_PAGES.HOME}>{t("Home")}</Link>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
                 {crumbs.map((item, index) => {

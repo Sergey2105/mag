@@ -1,4 +1,4 @@
-import { PAGES } from "@/constants/routes";
+import { PUBLIC_PAGES } from "@/constants/routes";
 
 export interface IMenuItem {
     href: string;
@@ -7,19 +7,19 @@ export interface IMenuItem {
 
 export const MENU = [
     {
-        href: PAGES.HOME.ROOT,
+        href: PUBLIC_PAGES.HOME,
         name: "Home",
     },
     {
-        href: PAGES.CATALOG.ROOT,
+        href: PUBLIC_PAGES.CATALOG.ROOT,
         name: "Catalog",
     },
     {
-        href: PAGES.ABOUT,
+        href: PUBLIC_PAGES.ABOUT,
         name: "About",
     },
     {
-        href: PAGES.CONTACTS,
+        href: PUBLIC_PAGES.CONTACTS,
         name: "Contacts",
     },
 ];

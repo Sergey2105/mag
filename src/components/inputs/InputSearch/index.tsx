@@ -7,7 +7,7 @@ import { useRef, useState } from "react";
 import { useClickOutside } from "@reactuses/core";
 import { useDebounce } from "@/hooks/useDebouce";
 import { useQuery } from "@tanstack/react-query";
-import Loader from "@/components/Loader";
+import Loader from "@/components/ui/Loader";
 import { AxiosResponse } from "axios";
 
 interface InputSearchProps<T> {

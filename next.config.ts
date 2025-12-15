@@ -8,7 +8,27 @@ const nextConfig: NextConfig = {
     output: "standalone",
 
     images: {
-        domains: ["funko.com"],
+        domains: ["funko.com", "github.com", "avatars.yandex.net"],
+        remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "lh3.googleusercontent.com",
+                port: "",
+                pathname: "/**",
+            },
+            {
+                protocol: "https",
+                hostname: "avatars.githubusercontent.com",
+                port: "",
+                pathname: "/**",
+            },
+            {
+                protocol: "https",
+                hostname: "static-cdn.jtvnw.net",
+                port: "",
+                pathname: "/**",
+            },
+        ],
     },
 
     webpack(config) {

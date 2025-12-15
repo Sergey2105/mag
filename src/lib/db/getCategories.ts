@@ -1,9 +1,9 @@
 import { unstable_cache } from "next/cache";
-
+//серверная
 export const getCategoriesServer = unstable_cache(
     async () => {
         try {
-            const res = await fetch("http://localhost:5000/category", {
+            const res = await fetch("http://localhost:5000/api/category", {
                 method: "GET",
                 cache: "no-store",
             });
@@ -15,9 +15,9 @@ export const getCategoriesServer = unstable_cache(
             throw new Error("Error fetching categories from Nest");
         }
     },
-    ["categories"], 
+    ["categories"],
     {
-        revalidate: 3600, 
+        revalidate: 3600,
         tags: ["categories"],
     },
 );

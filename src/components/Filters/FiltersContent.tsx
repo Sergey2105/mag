@@ -1,6 +1,6 @@
 "use client";
 import { Input } from "@/components/ui/input";
-import { RangeSlider } from "@/components/RangeSlider";
+import { RangeSlider } from "@/components/ui/RangeSlider";
 import { useEffect, useState } from "react";
 import { useDebounce } from "@/hooks/useDebouce";
 import { useQueryState, parseAsInteger, parseAsString } from "nuqs";

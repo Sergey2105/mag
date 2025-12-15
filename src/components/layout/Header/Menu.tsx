@@ -1,8 +1,9 @@
 "use client";
 import { LocaleSwitcher } from "@/components/LocaleSwitcher";
-import { ModeToggle } from "@/components/ModeToggle";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { DASHBOARD_PAGES, PUBLIC_PAGES } from "@/constants/routes";
 import { Heart, ShoppingCart, User } from "lucide-react";
 import Link from "next/link";
 
@@ -10,19 +11,19 @@ export function Menu() {
     return (
         <div className="flex items-center gap-2">
             <nav className="flex items-center gap-2">
-                <Link href="/auth">
+                <Link href={DASHBOARD_PAGES.PROFILE}>
                     <Button variant="outline" size="icon">
                         <User className="size-5" />
                         <span className="sr-only">Профиль</span>
                     </Button>
                 </Link>
-                <Link href="/">
+                <Link href={PUBLIC_PAGES.FAVORITES}>
                     <Button variant="outline" size="icon">
                         <Heart className="size-5" />
                         <span className="sr-only">Избранное</span>
                     </Button>
                 </Link>
-                <Link href="/" className="relative w-fit">
+                <Link href={PUBLIC_PAGES.CART} className="relative w-fit">
                     <Button variant="outline" size="icon">
                         <ShoppingCart className="size-5" />
                         <span className="sr-only">Корзина</span>
@@ -32,7 +33,7 @@ export function Menu() {
             </nav>
             <div className="lg:flex items-center gap-2 hidden">
                 <LocaleSwitcher />
-                <ModeToggle />
+                <ThemeToggle />
             </div>
         </div>
     );
