@@ -2,6 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { PUBLIC_PAGES } from "@/constants/routes";
+import { memo } from "react";
 
 export interface ICatalogItemProps {
     name: string;
@@ -9,7 +10,7 @@ export interface ICatalogItemProps {
     images: string;
 }
 
-export default function CatalogItem(props: ICatalogItemProps) {
+export default memo(function CatalogItem(props: ICatalogItemProps) {
     const { name, images, slug } = props;
 
     return (
@@ -24,4 +25,4 @@ export default function CatalogItem(props: ICatalogItemProps) {
             <span className="text-[16px] text-center font-semibold leading-5 h-[2.8em] overflow-hidden line-clamp-2">{name}</span>
         </Link>
     );
-}
+});

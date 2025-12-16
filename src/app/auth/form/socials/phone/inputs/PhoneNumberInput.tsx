@@ -1,7 +1,7 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { LoaderCircleIcon } from "lucide-react";
-import { twMerge } from "tailwind-merge";
 
 interface PhoneNumberInputProps {
     phone: string;
@@ -19,7 +19,7 @@ export function PhoneNumberInput({ phone, setPhone, onSubmit, isLoading, type }:
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="+1 123 456 7890"
-                className={twMerge(
+                className={cn(
                     "w-full p-3 border border-gray-500 rounded bg-transparent text-white text-lg focus:outline-none",
                     type === "whatsapp" ? "focus:border-primary" : "focus:border-indigo-500",
                 )}
@@ -28,7 +28,7 @@ export function PhoneNumberInput({ phone, setPhone, onSubmit, isLoading, type }:
             <button
                 onClick={onSubmit}
                 disabled={isLoading || !phone}
-                className={twMerge(
+                className={cn(
                     "w-full py-2 text-white font-semibold rounded transition",
                     isLoading && "opacity-75 cursor-not-allowed",
                     type === "whatsapp" ? "bg-primary" : "bg-indigo-500",

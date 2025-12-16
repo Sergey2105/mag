@@ -8,3 +8,7 @@ export interface IUser {
     verificationToken?: string;
     rights: UserRole[];
 }
+
+export interface IFormData extends Pick<IUser, "email"> {
+    password: string;
+}

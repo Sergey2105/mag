@@ -1,13 +1,13 @@
 "use client";
 import { PUBLIC_PAGES } from "@/constants/routes";
 import { useProfile } from "@/hooks/useProfile";
+import { cn } from "@/lib/utils";
 import authService from "@/services/auth/auth.service";
 import { useMutation } from "@tanstack/react-query";
 import { LoaderCircleIcon } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
-import { twMerge } from "tailwind-merge";
 
 export function ProfileInfo() {
     const router = useRouter();
@@ -49,11 +49,7 @@ export function ProfileInfo() {
             <br />
             <p>Rights: {user.rights?.join(", ")}</p>
             <br />
-            <button
-                onClick={() => mutateLogout()}
-                disabled={isLogoutLoading}
-                className={twMerge("mt-2 bg-primary text-white px-4 py-2 rounded-md", isLogoutLoading && "bg-gray-500")}
-            >
+            <button onClick={() => mutateLogout()} disabled={isLogoutLoading} className={cn("mt-2 bg-primary text-white px-4 py-2 rounded-md", isLogoutLoading && "bg-gray-500")}>
                 {isLogoutLoading ? <LoaderCircleIcon className="animate-spin" /> : "Logout"}
             </button>
         </div>

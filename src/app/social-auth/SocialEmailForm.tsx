@@ -2,9 +2,9 @@
 
 import { useState, type FormEvent } from "react";
 
-import { twMerge } from "tailwind-merge";
 import { useEmailForm } from "./useEmailForm";
 import { LoaderCircleIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export default function SocialEmailForm() {
     const [email, setEmail] = useState("");
@@ -24,7 +24,7 @@ export default function SocialEmailForm() {
                 </div>
 
                 <div>
-                    <button type="submit" className={twMerge("bg-primary", isLoading && "opacity-75 cursor-not-allowed")} disabled={isLoading}>
+                    <button type="submit" className={cn("bg-primary", isLoading && "opacity-75 cursor-not-allowed")} disabled={isLoading}>
                         {isLoading ? <LoaderCircleIcon className="animate-spin" /> : "Submit"}
                     </button>
                 </div>

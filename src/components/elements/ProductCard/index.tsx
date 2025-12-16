@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { ShoppingBasket } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { PUBLIC_PAGES } from "@/constants/routes";
-import ProductControls from "@/components/ProductControls";
+import ProductCardControls from "@/components/ProductCardControls";
 
 export default function ProductCard(props: any) {
     const { id, name, price, images, category, className, slug } = props;
@@ -31,7 +31,7 @@ export default function ProductCard(props: any) {
                     <span className="text-[18px] font-bold self-end">{price}</span>
                 </div>
 
-                <ProductControls className="mt-2.5" />
+                <ProductCardControls className="mt-2.5" />
             </div>
         </Link>
     );

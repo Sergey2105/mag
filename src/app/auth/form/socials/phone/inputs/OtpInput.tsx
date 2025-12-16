@@ -1,7 +1,7 @@
 'use client'
 
+import { cn } from '@/lib/utils'
 import { useEffect, useRef, useState } from 'react'
-import { twMerge } from 'tailwind-merge'
 
 interface OtpInputProps {
 	otp: string[]
@@ -52,7 +52,7 @@ export function OtpInput({ otp, setOtp, onComplete, type }: OtpInputProps) {
 					value={digit}
 					onChange={e => handleOtpChange(i, e.target.value)}
 					onKeyDown={e => handleOtpKeyDown(i, e)}
-					className={twMerge(
+					className={cn(
 						'w-14 h-14 text-center border border-gray-500 rounded bg-transparent text-white !text-3xl font-semibold focus:outline-none',
 						type === 'whatsapp'
 							? 'focus:border-primary'
