@@ -1,21 +1,37 @@
+"use client";
+
 import ProductCardControls from "@/components/ProductCardControls";
+import { useAddToCart } from "@/hooks/useAddToCart";
 import { cn } from "@/lib/utils";
 
-export default async function ProductInfo(props: any) {
-    const { name, price, description, className } = props;
+interface ProductInfoProps {}
+
+export default function ProductInfo(props: any) {
+    const { id, name, images, price, description, discountPrice, isHasSecondDiscount, className } = props;
+
+    const product = { id, name, images, price, discountPrice, isHasSecondDiscount };
+
+    const mutation = useAddToCart();
+
+    const handleAddToCart = (quantity: number) => {
+        mutation.mutate({
+            product,
+            quantity: quantity,
+        });
+    };
 
     return (
-        <div className={cn("", className)}>
-            <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">{name}</h2>
-            <div className="flex flex-col gap-1 py-6 border-b">
+        <div className={cn("space-y-8", className)}>
+            <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">{name}</h2>
+            <div className="flex flex-col gap-1 border-b pb-2">
                 <p className="text-[18px] font-normal text-neutral-400">Статус:</p>
                 <p className="text-[16px] font-normal">Под заказ</p>
             </div>
-            <div className="pt-6">
+            <div className="flex flex-col gap-1">
                 <p className="text-[32px] font-semibold">{price}</p>
-                <ProductCardControls />
+                <ProductCardControls handleAddToCart={handleAddToCart} quantityClassName="flex" />
             </div>
-            <div className="py-6">
+            <div className="">
                 <p className="text-[18px] font-normal text-neutral-400">Описание:</p>
                 <p className="text-[16px] font-normal">{description}</p>
             </div>

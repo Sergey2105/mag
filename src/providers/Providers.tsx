@@ -1,6 +1,5 @@
 "use client";
 
-import { AllStoresProvider } from "@/providers/AllStoresProvider";
 import QueryProvider from "@/providers/QueryProvider";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { NextIntlClientProvider } from "next-intl";
@@ -19,12 +18,10 @@ export function Providers({ children, locale, messages }: ProvidersProps) {
     return (
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
             <NextIntlClientProvider locale={locale} messages={messages} timeZone={DEFAULT_TIME_ZONE}>
-                <AllStoresProvider>
-                    <QueryProvider>
-                        <Toaster />
-                        <NuqsAdapter>{children}</NuqsAdapter>
-                    </QueryProvider>
-                </AllStoresProvider>
+                <QueryProvider>
+                    <Toaster />
+                    <NuqsAdapter>{children}</NuqsAdapter>
+                </QueryProvider>
             </NextIntlClientProvider>
         </ThemeProvider>
     );

@@ -8,7 +8,7 @@ interface ProductCardProps {
 export default function ProductCardSkeleton(props: ProductCardProps) {
     const { className } = props;
     return (
-        <div className="relative rounded-2xl border flex flex-col w-full pt-4 pb-6 px-4 md:px-6">
+        <div className="relative cursor-pointer overflow-hidden group rounded-2xl border border-amber-500 flex flex-col w-full pt-3 pb-6 px-3 lg:px-6 lg:pt-6 lg:pb-7 2xl:px-4 2xl:pt-4 2xl:pb-4">
             <div className="relative w-full h-full aspect-square">
                 <Skeleton className="w-full h-full rounded-xl" />
             </div>

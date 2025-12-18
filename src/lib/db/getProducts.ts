@@ -3,57 +3,47 @@ import { unstable_cache } from "next/cache";
 import axios from "axios";
 //серверная
 
-export const getProductsServer = unstable_cache(
-    async () => {
-        try {
-            const res = await axios.get("http://localhost:5000/api/products", {
-                withCredentials: false,
-            });
+export async function getProductsServer() {
+    const res = await fetch("http://localhost:5000/api/products", {
+        next: {
+            revalidate: 3600,
+            tags: ["products"],
+        },
+    });
 
-            return res.data;
-        } catch (error) {
-            throw new Error("Error fetching products from Nest");
-        }
-    },
-    ["products"],
-    {
-        revalidate: 3600,
-        tags: ["products"],
-    },
-);
+    if (!res.ok) {
+        throw new Error("Failed to fetch products");
+    }
 
-export const getProductByIdServer = unstable_cache(
-    async (id: string) => {
-        try {
-            const res = await axios.get(`http://localhost:5000/api/products/${id}`, {
-                withCredentials: false,
-            });
+    return res.json();
+}
 
-            return res.data;
-        } catch (error) {
-            throw new Error("Error fetching product by ID from Nest");
-        }
-    },
-    ["product-by-id"],
-    {
-        revalidate: 3600,
-        tags: ["products"],
-    },
-);
+export async function getProductByIdServer(id: string) {
+    const res = await fetch(`http://localhost:5000/api/products/${id}`, {
+        next: {
+            revalidate: 3600,
+            tags: ["product-by-id"],
+        },
+    });
 
-export const getProductBySlugServer = unstable_cache(
-    async (slug: string) => {
-        try {
-            const res = await axios.get(`http://localhost:5000/api/products/category/${slug}`);
+    if (!res.ok) {
+        throw new Error("Failed to fetch products");
+    }
 
-            return res.data;
-        } catch (error: any) {
-            throw new Error("Failed to fetch product by slug");
-        }
-    },
-    ["product-by-slug"],
-    {
-        revalidate: 3600,
-        tags: ["products"],
-    },
-);
+    return res.json();
+}
+
+export async function getProductBySlugServer(slug: string) {
+    const res = await fetch(`http://localhost:5000/api/products/category/${slug}`, {
+        next: {
+            revalidate: 3600,
+            tags: ["products-by-slag"],
+        },
+    });
+
+    if (!res.ok) {
+        throw new Error("Failed to fetch products");
+    }
+
+    return res.json();
+}

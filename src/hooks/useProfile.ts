@@ -1,7 +1,9 @@
+import { saveAccessToken } from "@/services/auth/auth-token.service";
 import authService from "@/services/auth/auth.service";
 import userService from "@/services/user.service";
 import { transformUserToState } from "@/untils/transform-user-to-state";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 
 export function useProfile() {
     const { data, isLoading } = useQuery({
@@ -19,6 +21,12 @@ export function useProfile() {
         queryFn: () => authService.getNewTokens(),
         enabled: !data?.data,
     });
+
+    useEffect(() => {
+        if (!isSuccess) return;
+
+        if (dataTokens.data.accessToken) saveAccessToken(dataTokens.data.accessToken);
+    }, [isSuccess]);
 
     const profile = data?.data;
 

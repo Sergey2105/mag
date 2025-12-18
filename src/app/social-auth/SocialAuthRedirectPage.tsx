@@ -1,13 +1,13 @@
 "use client";
 
-import { AuthToken } from "@/types/auth.types";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
-import authTokenService from "@/services/auth/auth-token.service";
 import SocialEmailForm from "./SocialEmailForm";
 import { LoaderCircleIcon } from "lucide-react";
 import { PUBLIC_PAGES } from "@/constants/routes";
+import { AuthToken } from "@/services/auth/auth.types";
+import { saveAccessToken } from "@/services/auth/auth-token.service";
 
 export function SocialAuthRedirectPage() {
     const searchParams = useSearchParams();
@@ -17,7 +17,7 @@ export function SocialAuthRedirectPage() {
 
     useEffect(() => {
         const accessToken = searchParams.get(AuthToken.ACCESS_TOKEN);
-        if (accessToken) authTokenService.saveAccessToken(accessToken);
+        if (accessToken) saveAccessToken(accessToken);
 
         if (!needEmail) router.replace(PUBLIC_PAGES.HOME);
     }, []);

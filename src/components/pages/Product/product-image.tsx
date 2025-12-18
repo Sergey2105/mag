@@ -13,8 +13,6 @@ interface ProductImageProps {
 export default function ProductImage(props: ProductImageProps) {
     const { images, name, className } = props;
 
-    console.log(images);
-
     return (
         <div className={cn("h-full w-full", className)}>
             <Swiper
@@ -31,7 +29,7 @@ export default function ProductImage(props: ProductImageProps) {
                 {images &&
                     images.map((el, i) => (
                         <SwiperSlide>
-                            <Image src={el} alt={name} width={600} height={600} objectFit="contain" className="object-center" />
+                            <Image src={el} alt={name} width={600} height={600} objectFit="contain" className="object-center" loading="lazy" />
                         </SwiperSlide>
                     ))}
             </Swiper>

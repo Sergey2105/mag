@@ -1,5 +1,17 @@
-import Catalog from "@/components/pages/CatalogPage";
+import CatalogContent from "@/app/catalog/CatalogContent";
+import CatalogSkeleton from "@/app/catalog/CatalogSkeleton";
+import BreadcrumbsServer from "@/components/Breadcrumbs/BreadcrumbsServer";
+import { Title } from "@/components/ui/title";
+import { Suspense } from "react";
 
 export default function CatalogPage() {
-    return <Catalog />;
+    return (
+        <div className="wrapper mt-10">
+            <BreadcrumbsServer />
+            <Title text="Каталог" size="lg" className="mt-6" />
+            <Suspense fallback={<CatalogSkeleton />}>
+                <CatalogContent />
+            </Suspense>
+        </div>
+    );
 }

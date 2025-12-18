@@ -2,7 +2,8 @@
 
 import { PUBLIC_PAGES } from "@/constants/routes";
 import authService from "@/services/auth/auth.service";
-import { IFormData } from "@/types/auth.types";
+import { IFormData } from "@/services/auth/auth.types";
+import { useGuestCartStore } from "@/stores/guest.store";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -13,6 +14,8 @@ import toast from "react-hot-toast";
 
 export function useAuthForm(isLogin: boolean, form: UseFormReturn<IFormData>) {
     const { register, handleSubmit, reset } = useForm<IFormData>();
+
+    const { clearCart } = useGuestCartStore();
 
     const router = useRouter();
     const [isPending, startTransition] = useTransition();
@@ -25,6 +28,7 @@ export function useAuthForm(isLogin: boolean, form: UseFormReturn<IFormData>) {
         onSuccess() {
             startTransition(() => {
                 form.reset();
+                clearCart();
                 router.push(PUBLIC_PAGES.HOME);
             });
         },
@@ -35,9 +39,11 @@ export function useAuthForm(isLogin: boolean, form: UseFormReturn<IFormData>) {
         },
     });
 
+    const guestItems = useGuestCartStore((s) => s.items);
+
     const { mutate: mutateRegister, isPending: isRegisterPending } = useMutation({
         mutationKey: ["register"],
-        mutationFn: (data: IFormData) => authService.main("register", data, recaptchaRef.current?.getValue()),
+        mutationFn: (data: IFormData) => authService.main("register", data, recaptchaRef.current?.getValue(), guestItems),
         onSuccess() {
             startTransition(() => {
                 form.reset();

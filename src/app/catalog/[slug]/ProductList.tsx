@@ -1,20 +1,21 @@
-import ProductCard from "@/components/elements/ProductCard";
-import ProductCardSkeleton from "@/components/elements/ProductCard/card-skeleton";
+import ProductItem from "@/app/catalog/[slug]/ProductItem";
 import { cn } from "@/lib/utils";
+import { IProduct } from "@/types/product.interface";
+
 interface Props {
-    items: any[];
+    items: IProduct[];
     className?: string;
-    listClassName?: string;
 }
 
 export default function ProductList(props: Props) {
-    const { items, className, listClassName } = props;
+    const { items, className } = props;
+
     return (
         <>
             {items.length !== 0 ? (
-                <div className={cn("grid gap-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-4", listClassName)}>
+                <div className={cn("grid gap-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-4", className)}>
                     {items.map((product, i) => (
-                        <ProductCard
+                        <ProductItem
                             key={product.id}
                             id={product.id}
                             name={product.name}
@@ -22,6 +23,8 @@ export default function ProductList(props: Props) {
                             price={product.price}
                             category={product.category.name}
                             slug={product.category.slug}
+                            discountPrice={product.discountPrice}
+                            isHasSecondDiscount={product.isHasSecondDiscount}
                         />
                     ))}
                 </div>

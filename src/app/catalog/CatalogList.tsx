@@ -1,12 +1,13 @@
-import CatalogItem from "@/components/elements/CtalogItem";
+import CatalogItem from "@/app/catalog/CtalogItem";
+import { ICategory } from "@/types/category.interface";
 
 interface CatalogListProps {
-    list: any[];
+    list: ICategory[];
 }
 
 export default function CatalogList(props: CatalogListProps) {
     const { list } = props;
-    console.log(list);
+
     return (
         <>
             {list && list.length !== 0 ? (

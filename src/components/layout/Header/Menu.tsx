@@ -4,10 +4,14 @@ import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { DASHBOARD_PAGES, PUBLIC_PAGES } from "@/constants/routes";
+import { useCart } from "@/hooks/useCart";
 import { Heart, ShoppingCart, User } from "lucide-react";
 import Link from "next/link";
 
 export function Menu() {
+    const { totalCount } = useCart();
+    console.log(totalCount);
+
     return (
         <div className="flex items-center gap-2">
             <nav className="flex items-center gap-2">
@@ -27,7 +31,7 @@ export function Menu() {
                     <Button variant="outline" size="icon">
                         <ShoppingCart className="size-5" />
                         <span className="sr-only">Корзина</span>
-                        <Badge className="absolute -top-2.5 -right-2.5 h-5 min-w-5 px-1 tabular-nums">8</Badge>
+                        {totalCount > 0 && <Badge className="absolute -top-2.5 -right-2.5 h-5 min-w-5 px-1 tabular-nums">{totalCount}</Badge>}
                     </Button>
                 </Link>
             </nav>
