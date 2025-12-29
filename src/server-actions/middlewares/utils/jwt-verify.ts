@@ -1,6 +1,6 @@
 "use server";
 
-import { ITokenInside } from "@/types/auth.types";
+import { ITokenInside } from "@/services/auth/auth.types";
 import { transformUserToState } from "@/untils/transform-user-to-state";
 import * as jose from "jose";
 

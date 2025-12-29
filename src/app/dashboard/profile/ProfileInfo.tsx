@@ -39,7 +39,7 @@ export function ProfileInfo() {
         );
 
     return (
-        <div className="mt-10">
+        <div className="wrapper mt-10">
             {user.avatarPath && <Image src={user.avatarPath} alt="Avatar" width={70} height={70} className="rounded-xl mb-6" />}
             <h2 className="text-2xl font-bold">Hi, {user.name || "Anonym"}</h2>
             <br />

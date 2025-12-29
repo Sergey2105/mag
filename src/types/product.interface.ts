@@ -1,18 +1,33 @@
 import { ICategory } from "@/types/category.interface";
+import { IFavorite } from "@/types/favorites.types";
 
 export interface IProduct {
     id: string;
+
     name: string;
     slug: string;
+
     images: string[];
+
     price: number;
+    discountPrice: number;
+
     description: string;
     categoryID: string;
+
     isActive: boolean;
-    createdAt: string;
-    updatedAt: string;
+    isHasSecondDiscount: boolean;
+
+    createdAt: Date;
+    updatedAt: Date;
+
     category: ICategory;
+
+    // cartItems: ICartItem[];
+    // favorites: IFavorite[];
 }
+
+export type TCartProduct = Pick<IProduct, "id" | "name" | "images" | "price" | "discountPrice" | "isHasSecondDiscount">;
 
 export interface IPagination {
     total: number;
@@ -21,7 +36,7 @@ export interface IPagination {
     totalPages: number;
 }
 
-export interface IProductsSlugResponse {
+export interface IProductsPagination {
     products: IProduct[];
     pagination: IPagination;
 }

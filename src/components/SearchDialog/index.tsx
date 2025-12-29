@@ -46,7 +46,9 @@ export function SearchDialog<T, C>(props: SearchDialogProps<T, C>) {
         queryKey: ["dialog-initial-data"],
         queryFn: () => initialData!.onSearch(),
         select: (d) => d.data,
-        enabled: !!initialData,
+        enabled: !!initialData && open,
+        staleTime: 5 * 60 * 1000,
+        gcTime: 30 * 60 * 1000,
     });
 
     const { data, isLoading, isFetching, isError } = useQuery({

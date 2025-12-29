@@ -4,7 +4,11 @@ import ProductInfo from "@/components/pages/Product/product-info";
 import { getProductByIdServer } from "@/lib/db/getProducts";
 import { notFound } from "next/navigation";
 
-export default async function Product(props: any) {
+interface ProductProps {
+    id: string;
+}
+
+export default async function Product(props: ProductProps) {
     const { id } = props;
     const product = await getProductByIdServer(id);
 
@@ -19,7 +23,7 @@ export default async function Product(props: any) {
             <BreadcrumbsServer lastLabel={product?.name} />
 
             <div className="flex mt-10 gap-1 flex-row items-stretch">
-                <ProductInfo name={product?.name} description={product?.description} price={product?.price} className={"flex-[50_1]"} />
+                <ProductInfo id={product.id} name={product?.name} images={product?.images} description={product?.description} price={product?.price} className={"flex-[50_1]"} />
                 <ProductImage images={product?.images} name={product?.name} className={"flex-[50_1] h-[600px]"} />
             </div>
         </div>

@@ -3,15 +3,15 @@
 import { Menu } from "@/components/layout/Header/Menu";
 import Image from "next/image";
 import Link from "next/link";
-import Logo from "../../../shared/icon/Logo.svg";
-import { productServices } from "@/services/db/product.services";
+import Logo from "@/shared/icon/Logo.svg";
 import { MenuList } from "@/components/layout/Header/MenuList";
 import { MenuMobile } from "@/components/layout/Header/MenuMobile";
 import { SearchDialog } from "@/components/SearchDialog";
 import { IProduct } from "@/types/product.interface";
-import { categoryServices } from "@/services/db/category.services";
 import { ICategory } from "@/types/category.interface";
 import { PUBLIC_PAGES } from "@/constants/routes";
+import productService from "@/services/product.service";
+import categoryService from "@/services/category.service";
 
 export function Header() {
     return (
@@ -24,7 +24,7 @@ export function Header() {
                     <MenuList className="lg:flex items-center gap-12 hidden" />
                     <div className="flex items-center gap-2">
                         <SearchDialog<IProduct, ICategory>
-                            onSearch={(query) => productServices.getProductBySearch(query)}
+                            onSearch={(query) => productService.getProductBySearch(query)}
                             renderItem={(product) => (
                                 <>
                                     <Image className="rounded-sm h-8 w-8" width={32} height={32} src={product.images[0]} alt={product.name} />
@@ -36,7 +36,7 @@ export function Header() {
                             searchLabel="Найденные товары"
                             placeholder="Поиск товаров..."
                             initialData={{
-                                onSearch: () => categoryServices.getCategory(),
+                                onSearch: () => categoryService.fetchAll(),
                                 renderItem: (category) => (
                                     <>
                                         <Image className="rounded-sm h-8 w-8" width={32} height={32} src={category.images} alt={category.name} />

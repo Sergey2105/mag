@@ -53,8 +53,16 @@ const nextConfig: NextConfig = {
     async rewrites() {
         return [
             {
+                source: "/auth/google",
+                destination: "http://localhost:4200/auth/google",
+            },
+            {
+                source: "/auth/github",
+                destination: "http://localhost:4200/auth/github",
+            },
+            {
                 source: "/uploads/:path*",
-                destination: `${process.env.NEXT_PUBLIC_API_URL}/uploads/:path*`,
+                destination: "http://localhost:4200/uploads/:path*",
             },
         ];
     },

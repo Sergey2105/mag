@@ -22,10 +22,9 @@ export const PUBLIC_PAGES = {
     },
     ABOUT: "/about",
     CONTACTS: "/contacts",
-    AUTH: "/auth",
     FAVORITES: "/favorites",
     CART: "/cart",
-    LOGIN: `/auth/login`,
-    REGISTER: `/auth/register`,
+    LOGIN: `/login`,
+    REGISTER: `/register`,
     PLANS: "/plans",
 };

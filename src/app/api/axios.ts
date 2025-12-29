@@ -1,8 +1,8 @@
-import authTokenService from "@/services/auth/auth-token.service";
-import authService from "@/services/auth/auth.service";
 import axios, { CreateAxiosDefaults } from "axios";
 import { errorCatch, getContentType } from "./api.helper";
 import { API_URL } from "@/constants/constants";
+import { AuthTokenService, removeAccessToken } from "@/services/auth/auth-token.service";
+import authService from "@/services/auth/auth.service";
 
 const axiosOptions: CreateAxiosDefaults = {
     baseURL: API_URL,
@@ -16,7 +16,7 @@ export const axiosClassic = axios.create(axiosOptions);
 export const instance = axios.create(axiosOptions);
 
 instance.interceptors.request.use((config) => {
-    const accessToken = authTokenService.getAccessToken();
+    const accessToken = AuthTokenService();
 
     if (config?.headers && accessToken) {
         config.headers.Authorization = `Bearer ${accessToken}`;
@@ -38,7 +38,7 @@ instance.interceptors.response.use(
                 return instance.request(originalRequest);
             } catch (error) {
                 if (errorCatch(error) === "jwt expired" || errorCatch(error) === "Refresh token not passed") {
-                    authTokenService.removeAccessToken();
+                    removeAccessToken();
                 }
             }
         }
