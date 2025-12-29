@@ -10,7 +10,6 @@ import Link from "next/link";
 
 export function Menu() {
     const { totalCount } = useCart();
-    console.log(totalCount);
 
     return (
         <div className="flex items-center gap-2">

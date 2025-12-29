@@ -1,4 +1,4 @@
-import ProductItem from "@/app/catalog/[slug]/ProductItem";
+import ProductItem from "@/app/(public)/catalog/[slug]/ProductItem";
 import { cn } from "@/lib/utils";
 import { IProduct } from "@/types/product.interface";
 

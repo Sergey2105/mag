@@ -13,7 +13,7 @@ export default function HomePage() {
     const t = useTranslations("Home");
 
     return (
-        <div>
+        <div className="wrapper">
             <h1 className="mt-4">Home Page</h1>
             <br />
             <p>Для проверки, есть страницы:</p>

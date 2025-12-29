@@ -3,7 +3,7 @@
 import { Menu } from "@/components/layout/Header/Menu";
 import Image from "next/image";
 import Link from "next/link";
-import Logo from "../../../shared/icon/Logo.svg";
+import Logo from "@/shared/icon/Logo.svg";
 import { MenuList } from "@/components/layout/Header/MenuList";
 import { MenuMobile } from "@/components/layout/Header/MenuMobile";
 import { SearchDialog } from "@/components/SearchDialog";

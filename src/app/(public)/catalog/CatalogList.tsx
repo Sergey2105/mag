@@ -1,4 +1,4 @@
-import CatalogItem from "@/app/catalog/CtalogItem";
+import CatalogItem from "@/app/(public)/catalog/CtalogItem";
 import { ICategory } from "@/types/category.interface";
 
 interface CatalogListProps {

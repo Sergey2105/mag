@@ -10,6 +10,7 @@ export function useProfile() {
         queryKey: ["profile"],
         queryFn: () => userService.fetchProfile(),
         refetchInterval: 1800000, // 30 minutes
+        retry: false, // не повторять в случае ошибки
     });
 
     const {
@@ -20,12 +21,16 @@ export function useProfile() {
         queryKey: ["new tokens"],
         queryFn: () => authService.getNewTokens(),
         enabled: !data?.data,
+        retry: false,
     });
 
     useEffect(() => {
         if (!isSuccess) return;
 
-        if (dataTokens.data.accessToken) saveAccessToken(dataTokens.data.accessToken);
+        if (dataTokens?.data?.accessToken) {
+            saveAccessToken(dataTokens.data.accessToken);
+            refetch();
+        }
     }, [isSuccess]);
 
     const profile = data?.data;

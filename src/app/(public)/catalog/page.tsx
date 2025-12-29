@@ -1,5 +1,5 @@
-import CatalogContent from "@/app/catalog/CatalogContent";
-import CatalogSkeleton from "@/app/catalog/CatalogSkeleton";
+import CatalogContent from "@/app/(public)/catalog/CatalogContent";
+import CatalogSkeleton from "@/app/(public)/catalog/CatalogSkeleton";
 import BreadcrumbsServer from "@/components/Breadcrumbs/BreadcrumbsServer";
 import { Title } from "@/components/ui/title";
 import { Suspense } from "react";

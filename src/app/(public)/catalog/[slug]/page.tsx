@@ -1,4 +1,4 @@
-import ProductList from "@/app/catalog/[slug]/ProductList";
+import ProductList from "@/app/(public)/catalog/[slug]/ProductList";
 import BreadcrumbsServer from "@/components/Breadcrumbs/BreadcrumbsServer";
 import TopBar from "@/components/TopBar";
 import { Title } from "@/components/ui/title";

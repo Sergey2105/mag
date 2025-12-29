@@ -6,7 +6,7 @@ import cartService from "@/services/cart.service";
 import { useMemo } from "react";
 
 export function useCart() {
-    const { user } = useProfile();
+    const { user, isLoading: isUserLoading } = useProfile();
 
     const guestItems = useGuestCartStore((s) => s.items);
 
@@ -19,20 +19,29 @@ export function useCart() {
         }
     };
 
-    const { data = [], isLoading } = useQuery({
+    const { data = [], isLoading: isCartLoading } = useQuery({
         queryKey: ["cart", user.isLoggedIn],
         queryFn: fetchCartItems,
         enabled: Boolean(user.isLoggedIn),
     });
 
     const cartItems = useMemo(() => {
+        if (isUserLoading) {
+            return [];
+        }
+
         if (user.isLoggedIn) {
+            if (isCartLoading) {
+                return [];
+            }
             return data ?? [];
         }
         return guestItems;
-    }, [user.isLoggedIn, data, guestItems]);
+    }, [user.isLoggedIn, data, guestItems, isUserLoading, isCartLoading]);
 
     const totalCount = useMemo(() => cartItems.reduce((acc, item) => acc + item.quantity, 0), [cartItems]);
+
+    const isLoading = isUserLoading || (user.isLoggedIn && isCartLoading);
 
     return {
         cartItems,

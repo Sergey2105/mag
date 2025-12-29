@@ -4,8 +4,8 @@ import { BACKEND_SOCIAL_AUTH_URL } from "@/constants/constants";
 import { Fragment, useState } from "react";
 
 import { LoaderCircleIcon } from "lucide-react";
-import { TelegramLoginModal } from "@/app/auth/form/socials/TelegramLoginModal";
-import { socialsList, TSocials } from "@/app/auth/form/socials/social-list.data";
+import { TelegramLoginModal } from "@/app/(auth)/form/socials/TelegramLoginModal";
+import { socialsList, TSocials } from "@/app/(auth)/form/socials/social-list.data";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -38,7 +38,7 @@ export function SocialMediaButtons(props: SocialMediaButtonsProps) {
 
     return (
         <>
-            <div className={cn("grid grid-cols-4 gap-3", className)}>
+            <div className={cn("flex justify-center gap-3", className)}>
                 {list.map(({ id, icon }) => (
                     <Fragment key={id}>
                         {id === "telegram" ? (

@@ -1,4 +1,4 @@
-import CatalogList from "@/app/catalog/CatalogList";
+import CatalogList from "@/app/(public)/catalog/CatalogList";
 import { getCategoriesServer } from "@/lib/db/getCategories";
 import categoryService from "@/services/category.service";
 
