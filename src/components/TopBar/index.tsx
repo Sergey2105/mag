@@ -2,24 +2,32 @@
 import { Button } from "@/components/ui/button";
 import { ArrowDownWideNarrow, ArrowUpNarrowWide } from "lucide-react";
 import { parseAsString, useQueryState } from "nuqs";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Filters from "@/components/Filters";
 
 export default function TopBar(props: any) {
     const { className } = props;
     const router = useRouter();
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
 
     const [sort, setSort] = useQueryState(
         "sort",
         parseAsString.withDefault("").withOptions({
-            shallow: true,
+            shallow: false,
             clearOnDefault: true,
         }),
     );
 
     const resetAll = () => {
-        router.replace(window.location.pathname);
-        console.log(window.location.pathname);
+        const params = new URLSearchParams(searchParams);
+        params.forEach((_, key) => {
+            if (key !== "page") params.delete(key);
+        });
+
+        const query = params.toString();
+
+        router.replace(query ? `${pathname}?${query}` : pathname);
     };
 
     return (
@@ -29,11 +37,11 @@ export default function TopBar(props: any) {
                     <Filters />
                 </div>
                 <div className="flex gap-2">
-                    <Button className="flex-1 w-full" onClick={() => setSort("asc")} variant="outline">
+                    <Button className="flex-1 w-full" onClick={() => setSort("asc")} variant={sort === "asc" ? "default" : "outline"}>
                         <ArrowDownWideNarrow className="size-5" />
                         Дешевле
                     </Button>
-                    <Button className="flex-1 w-full" onClick={() => setSort("desc")} variant="outline">
+                    <Button className="flex-1 w-full" onClick={() => setSort("desc")} variant={sort === "desc" ? "default" : "outline"}>
                         <ArrowUpNarrowWide className="size-5" />
                         Дороже
                     </Button>

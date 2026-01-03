@@ -1,28 +1,60 @@
 import ProductList from "@/app/(public)/catalog/[slug]/ProductList";
 import BreadcrumbsServer from "@/components/Breadcrumbs/BreadcrumbsServer";
+import { ProductPagination } from "@/components/Pagination";
 import TopBar from "@/components/TopBar";
 import { Title } from "@/components/ui/title";
 import productService from "@/services/product.service";
 import Link from "next/link";
+import { notFound } from "next/navigation";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 interface Props {
     params: {
         slug: string;
         id: string;
     };
+    searchParams: {
+        sort?: "asc" | "desc";
+        priceFrom?: string;
+        priceTo?: string;
+        page?: string;
+    };
 }
 
-const fetchProducts = async (slug: string) => {
-    const response = await productService.getProductBySlug(slug);
-    return response.data;
+const fetchProducts = async (slug: string, sort?: "asc" | "desc", priceFrom?: number, priceTo?: number, page?: number) => {
+    try {
+        const options = {
+            sortBy: sort ? ("price" as const) : ("createdAt" as const),
+            sortOrder: sort || ("desc" as const),
+            minPrice: priceFrom,
+            maxPrice: priceTo,
+            page: page || 1,
+            limit: 20,
+        };
+
+        const response = await productService.getProductBySlug(slug, options);
+        return response.data;
+    } catch (error: any) {
+        if (error.response?.status === 404) {
+            notFound();
+        }
+        throw error;
+    }
 };
 
-export default async function CategoryPage({ params }: Props) {
-    const { slug, id } = await params;
+export default async function CategoryPage({ params, searchParams }: Props) {
+    const { slug } = await params;
+    const { sort, priceFrom, priceTo, page } = await searchParams;
 
-    const { pagination, products } = await fetchProducts(slug);
+    const minPrice = priceFrom ? Number(priceFrom) : undefined;
+    const maxPrice = priceTo ? Number(priceTo) : undefined;
+    const currentPage = page ? Number(page) : 1;
 
-    console.log(pagination);
+    const { pagination, products } = await fetchProducts(slug, sort, minPrice, maxPrice, currentPage);
+
+    console.log(products);
 
     return (
         <div className="wrapper mt-10">
@@ -33,7 +65,7 @@ export default async function CategoryPage({ params }: Props) {
                     <TopBar />
                     <div className="mt-10">
                         <ProductList items={products} />
-                        <div>Пагинация</div>
+                        <ProductPagination pagination={pagination} className="mt-10" />
                     </div>
                 </div>
             </div>

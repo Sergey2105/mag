@@ -19,7 +19,7 @@ export default function FiltersContent(props: FiltersContentProps) {
     const [priceFrom, setPriceFrom] = useQueryState(
         "priceFrom",
         parseAsInteger.withDefault(MIN_PRICE).withOptions({
-            shallow: true,
+            shallow: false,
             clearOnDefault: true,
         }),
     );
@@ -27,7 +27,7 @@ export default function FiltersContent(props: FiltersContentProps) {
     const [priceTo, setPriceTo] = useQueryState(
         "priceTo",
         parseAsInteger.withDefault(MAX_PRICE).withOptions({
-            shallow: true,
+            shallow: false,
             clearOnDefault: true,
         }),
     );
@@ -50,7 +50,7 @@ export default function FiltersContent(props: FiltersContentProps) {
     const [stockQuery, setStockQuery] = useQueryState(
         "stock",
         parseAsString.withDefault("all").withOptions({
-            shallow: true,
+            shallow: false,
             clearOnDefault: true,
         }),
     );

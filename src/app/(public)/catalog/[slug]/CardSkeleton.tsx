@@ -13,8 +13,8 @@ export default function ProductCardSkeleton(props: ProductCardProps) {
                 <Skeleton className="w-full h-full rounded-xl" />
             </div>
 
-            <div className="relative z-20 flex flex-col justify-end h-[110px] mt-2">
-                <Skeleton className="h-[21px] w-24" />
+            <div className="relative z-20 flex flex-col justify-end h-27.5 mt-2">
+                <Skeleton className="h-5.25 w-24" />
                 <div className="flex flex-col md:flex-row justify-between gap-2 mt-1">
                     <Skeleton className="h-6 w-full flex-70" />
                     <Skeleton className="h-6 w-full self-end flex-30" />

@@ -7,6 +7,7 @@ import { PUBLIC_PAGES } from "@/constants/routes";
 import ProductCardControls from "@/components/ProductCardControls";
 import { useAddToCart } from "@/hooks/useAddToCart";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Price, PriceValue } from "@/components/ui/price";
 
 export default function ProductItem(props: any) {
     const { id, name, price, images, category, className, slug, discountPrice, isHasSecondDiscount } = props;
@@ -60,7 +61,10 @@ export default function ProductItem(props: any) {
                             <span className="text-[14px] text-[#2f80ed] font-regular">{category}</span>
                             <div className="flex flex-col md:flex-row justify-between gap-2 mt-1">
                                 <span className="text-[16px] font-bold">{name}</span>
-                                <span className="text-[18px] font-bold self-end">{price}</span>
+                                {/* <span className="text-[18px] font-bold self-end">{price}</span> */}
+                                <Price className="self-end">
+                                    <PriceValue className="text-[18px] font-bold" price={price} currency="RUB" />
+                                </Price>
                             </div>
 
                             <ProductCardControls className="mt-2.5" handleAddToCart={handleAddToCart} />

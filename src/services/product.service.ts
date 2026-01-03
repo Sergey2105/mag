@@ -12,9 +12,9 @@ class ProductService {
         return axiosClassic.get<IProduct[]>(`${this._BASE_URL}/without-pagination`);
     }
 
-    async getProductByID(id: number) {
-        return axiosClassic.get<IProduct[]>(`${this._BASE_URL}/${id}`);
-    }
+    // async getProductByID(id: number) {
+    //     return axiosClassic.get<IProduct[]>(`${this._BASE_URL}/${id}`);
+    // }
 
     async getProductBySearch(search: string) {
         return axiosClassic
@@ -27,14 +27,38 @@ class ProductService {
             }));
     }
 
-    async getProductBySlug(slug: string) {
-        return axiosClassic.get<IProductsPagination>(`${this._BASE_URL}/by-slug/${slug}`);
-    }
-    async getProductBySlugAndSearch(slug: string, search: string) {
-        return axiosClassic.get<IProductsPagination>(this._BASE_URL, {
-            params: { slug: slug, query: search },
+    async getProductBySlug(
+        slug: string,
+        options?: {
+            search?: string;
+            minPrice?: number;
+            maxPrice?: number;
+            page?: number;
+            limit?: number;
+            sortBy?: "name" | "price" | "createdAt";
+            sortOrder?: "asc" | "desc";
+        },
+    ) {
+        const { search, minPrice, maxPrice, page = 1, limit = 20, sortBy = "createdAt", sortOrder = "desc" } = options || {};
+
+        return axiosClassic.get<IProductsPagination>(`${this._BASE_URL}/by-slug/${slug}`, {
+            params: {
+                search,
+                page,
+                minPrice,
+                maxPrice,
+                limit,
+                sortBy,
+                sortOrder,
+            },
         });
     }
+
+    // async getProductBySlugAndSearch(slug: string, search: string) {
+    //     return axiosClassic.get<IProductsPagination>(this._BASE_URL, {
+    //         params: { slug: slug, query: search },
+    //     });
+    // }
 }
 
 export default new ProductService();

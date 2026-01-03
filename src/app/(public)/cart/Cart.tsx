@@ -17,6 +17,7 @@ interface Props {
 
 export function Cart({ products }: Props) {
     const { cartItems } = useCart();
+    console.log(cartItems);
     const { user } = useProfile();
 
     const router = useRouter();

@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ADMIN_PAGES, DASHBOARD_PAGES, PREMIUM_PAGES, PUBLIC_PAGES } from "@/constants/routes";
 import { useQuery } from "@tanstack/react-query";
+
 const pages = [PUBLIC_PAGES.LOGIN, DASHBOARD_PAGES.PROFILE, PREMIUM_PAGES.HOME, ADMIN_PAGES.HOME, ADMIN_PAGES.MANAGER];
 
 export default function HomePage() {

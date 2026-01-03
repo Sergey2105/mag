@@ -49,3 +49,32 @@ export function useCart() {
         isLoading,
     };
 }
+// import CartService from "@/services/cart.service";
+
+// export function useCart() {
+//     const { user } = useProfile();
+
+//     const guestItems = useGuestCartStore((s) => s.items);
+
+//     const fetchCartItems = async (): Promise<ICartItem[]> => {
+//         try {
+//             const { data } = await CartService.getCart();
+//             return data?.items || [];
+//         } catch {
+//             return [];
+//         }
+//     };
+
+//     const { data = [], isLoading } = useQuery({
+//         queryKey: ["cart", user.isLoggedIn],
+//         queryFn: fetchCartItems,
+//         enabled: Boolean(user.isLoggedIn),
+//     });
+
+//     const cartItems = user.isLoggedIn ? data : guestItems;
+
+//     return {
+//         cartItems,
+//         isLoading,
+//     };
+// }

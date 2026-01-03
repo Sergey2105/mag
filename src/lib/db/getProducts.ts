@@ -19,12 +19,7 @@ export async function getProductsServer() {
 }
 
 export async function getProductByIdServer(id: string) {
-    const res = await fetch(`http://localhost:5000/api/products/${id}`, {
-        next: {
-            revalidate: 3600,
-            tags: ["product-by-id"],
-        },
-    });
+    const res = await fetch(`http://localhost:5000/api/products/${id}`);
 
     if (!res.ok) {
         throw new Error("Failed to fetch products");

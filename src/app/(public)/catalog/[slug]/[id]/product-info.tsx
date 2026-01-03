@@ -1,6 +1,7 @@
 "use client";
 
 import ProductCardControls from "@/components/ProductCardControls";
+import { Price, PriceValue } from "@/components/ui/price";
 import { useAddToCart } from "@/hooks/useAddToCart";
 import { cn } from "@/lib/utils";
 
@@ -28,7 +29,10 @@ export default function ProductInfo(props: any) {
                 <p className="text-[16px] font-normal">Под заказ</p>
             </div>
             <div className="flex flex-col gap-1">
-                <p className="text-[32px] font-semibold">{price}</p>
+                {/* <p className="text-[32px] font-semibold">{price}</p> */}
+                <Price>
+                    <PriceValue className="text-[32px] font-semibold" price={price} currency="RUB" />
+                </Price>
                 <ProductCardControls handleAddToCart={handleAddToCart} quantityClassName="flex" />
             </div>
             <div className="">

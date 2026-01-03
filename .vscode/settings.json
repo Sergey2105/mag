@@ -1,11 +1,249 @@
 {
-    "typescript.preferences.importModuleSpecifier": "non-relative",
-    "javascript.preferences.importModuleSpecifier": "non-relative",
-    "path-intellisense.mappings": {
-        "@": "${workspaceRoot}/src"
+    "typescript.preferences.importModuleSpecifier": "shortest",
+    "javascript.preferences.importModuleSpecifier": "shortest",
+    // "path-intellisense.mappings": {
+    //     "@": "${workspaceRoot}/src"
+    // },
+
+    // 💡 Блок про базовую эргономику: плавная прокрутка, авто-отступы, отключённая миникарта, быстрый выбор подсказок, мультикурсор через Cmd/Ctrl,
+    // Основные настройки редактора
+    "window.openFilesInNewWindow": "off",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": false,
+    "editor.smoothScrolling": true,
+    // "editor.minimap.enabled": false,
+    "editor.detectIndentation": true,
+    "editor.suggestSelection": "first",
+    "editor.multiCursorModifier": "ctrlCmd",
+
+    // 💡 Блок про читабельность: управляем переносом в 100 колонок, докручиваем экран ниже файла, правим парные теги вместе, автозакрываем теги, убираем «шум» служебных символов
+    // Настройки переноса слов
+    // "editor.wordWrap": "bounded",
+    // "editor.wrappingIndent": "same",
+    // "editor.wordWrapColumn": 100,
+
+    // Прокрутка за пределы последней строки
+    "editor.scrollBeyondLastLine": true,
+
+    // Связанные редактирования тегов
+    "editor.linkedEditing": true,
+
+    // Автоматическое закрытие тегов
+    "html.autoClosingTags": true,
+    "javascript.autoClosingTags": true,
+    "typescript.autoClosingTags": true,
+
+    // Отображение символов
+    "editor.renderControlCharacters": false,
+
+    // Подсветка неоднозначных символов
+    "editor.unicodeHighlight.ambiguousCharacters": false,
+
+    // 💡 Кастомизация подсветки синтаксиса, стилизация комментариев и ключевых слов
+    // Кастомизация подсветки синтаксиса
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            {
+                "scope": ["comment", "entity.name.type.class", "keyword", "constant", "storage.modifier", "storage.type.class.js"],
+                "settings": {
+                    "fontStyle": "italic"
+                }
+            },
+            {
+                "scope": ["invalid", "keyword.operator", "constant.numeric.css", "keyword.other.unit.px.css", "constant.numeric.decimal.js", "constant.numeric.json"],
+                "settings": {
+                    "fontStyle": ""
+                }
+            }
+        ]
     },
+
+    // 💡 Настройки терминала — шрифт, курсор
+    // Настройки терминала
+    "terminal.integrated.fontFamily": "PragmataPro Liga",
+    "terminal.integrated.fontSize": 15,
+    "terminal.integrated.cursorStyle": "line",
+
+    // 💡 Упрощаем работу с файлами, отключаем подтверждения
+    // Настройки обозревателя
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "explorer.compactFolders": false,
+    "workbench.startupEditor": "newUntitledFile",
+
+    // 💡 Минимизируем отвлекающие элементы при дебаге
+    // Настройки отладки
+    "debug.toolBarLocation": "hidden",
+    "debug.focusWindowOnBreak": false,
+    "debug.showInlineBreakpointCandidates": false,
+    "debug.showBreakpointsInOverviewRuler": false,
+
+    // 💡 Emmet — подключение для Blade и React
+    // Настройки Emmet
+    "emmet.includeLanguages": {
+        "blade": "html",
+        "javascript": "javascriptreact",
+        "svelte": "html"
+    },
+    "emmet.triggerExpansionOnTab": true,
+
+    // 💡 Prettier и форматирование кода
+    // Настройки форматирования
+    "prettier.semi": false, // Не ставить точки с запятой
+    "prettier.useTabs": true, // Использовать табы вместо пробелов
+    "editor.formatOnSave": true, // Форматировать файл при сохранении
+    "prettier.singleQuote": true, // Одинарные кавычки в JS/TS
+    // "prettier.jsxSingleQuote": true, // Одинарные кавычки в JSX
+    "prettier.arrowParens": "avoid", // Не использовать скобки в стрелочных функциях с одним аргументом
+    "prettier.htmlWhitespaceSensitivity": "ignore", // Игнорировать пробелы в HTML при форматировании
+    "prettier.singleAttributePerLine": true, // Один атрибут на строку в HTML/JSX
+    "prettier.bracketSameLine": false, // Закрывающий > на новой строке
+    "prettier.printWidth": 80, // Максимальная длина строки — 80 символов
+    "prettier.proseWrap": "always", // Всегда переносить длинный текст (например, в markdown)
+    "prettier.trailingComma": "none", // Не добавлять запятые в конце списков/объектов
+    "prettier.tabWidth": 2, // Ширина таба — 2 пробела (визуально)
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.inlineSuggest.enabled": true,
+
+    // 💡 Breadcrumbs отключены полностью
+    // Настройки для Breadcrumbs
+    "breadcrumbs.icons": false,
+    "breadcrumbs.showKeys": false,
+    "breadcrumbs.showFiles": false,
+    "breadcrumbs.symbolPath": "off",
+    "breadcrumbs.showArrays": false,
+    "breadcrumbs.showEvents": false,
+    "breadcrumbs.showFields": false,
+    "breadcrumbs.showClasses": false,
+    "breadcrumbs.showMethods": false,
+    "breadcrumbs.showBooleans": false,
+    "breadcrumbs.showFunctions": false,
+    "breadcrumbs.showConstants": false,
+    "breadcrumbs.showEnumMembers": false,
+    "breadcrumbs.showConstructors": false,
+
+    // 💡 Настройки JS / TS
+    // Настройки для JS и TS
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "typescript.preferences.quoteStyle": "single",
+    "javascript.preferences.quoteStyle": "single",
+    "javascript.format.semicolons": "remove",
+    "typescript.format.semicolons": "remove",
+    "js/ts.implicitProjectConfig.experimentalDecorators": true,
+
+    // 💡 Проверка орфографии (en + ru)
+    // Настройки проверки орфографии
+    "cSpell.language": "en,ru",
+    "cSpell.enabled": true,
+
+    // 💡 Разрешённые символы Unicode
+    // Разрешенные символы для Unicode Highlight
+    "editor.unicodeHighlight.allowedCharacters": {
+        "а": true,
+        "с": true,
+        "Т": true,
+        "б": true,
+        "е": true,
+        " ": true
+    },
+    "editor.hideCursorInOverviewRuler": true,
+    "git.enableSmartCommit": true,
+
+    // 💡 Исключаемые файлы
+    // Исключаемые файлы
+    "files.exclude": {
+        "**/.expo": true,
+        "**/.expo-shared": true,
+        "**/.idea": true,
+        "**/.nuxt": true,
+        "**/.next": true,
+        "**/coverage": true
+    },
+
+    // 💡 Прочие настройки
+    "files.defaultLanguage": "plaintext",
+    "diffEditor.ignoreTrimWhitespace": false,
+    "security.workspace.trust.untrustedFiles": "open",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "window.confirmBeforeClose": "keyboardOnly",
+    "git.openRepositoryInParentFolders": "never",
+    "editor.gotoLocation.multipleDefinitions": "goto",
+
+    "editor.stickyScroll.scrollWithEditor": false,
+    "workbench.tree.enableStickyScroll": false,
+    "editor.stickyScroll.enabled": true,
+    "github.copilot.editor.enableCodeActions": true,
+
+    // 💡 Кастомные лейблы вкладок для Next.js App Router (удобно для навигации)
     "workbench.editor.customLabels.patterns": {
-        "**/app/**/{page,layout,index}.{ts,tsx}": "(${dirname})/${filename}.${extname}",
-        "**/index.{ts,tsx}": "${dirname}/index.${extname}"
-    }
+        "**/app/**/[[]*[]]/[[]*[]]/page.tsx": "${dirname(2)}/${dirname(1)}/${dirname}/page.tsx",
+        "**/app/**/[[]*[]]/page.tsx": "${dirname(1)}/${dirname}/page.tsx",
+        "**/app/**/page.tsx": "${dirname}/page.tsx",
+        "**/app/**/[[]*[]]/[[]*[]]/layout.tsx": "${dirname(2)}/${dirname(1)}/${dirname}/layout.tsx",
+        "**/app/**/[[]*[]]/layout.tsx": "${dirname(1)}/${dirname}/layout.tsx",
+        "**/app/**/layout.tsx": "${dirname}/layout.tsx"
+    },
+
+    // 💡 Markdown — автообновление ссылок при переносе файлов
+    "markdown.updateLinksOnFileMove.enabled": "always",
+    "cSpell.autoFormatConfigFile": true,
+
+    // 💡 Ассоциации для TailwindCSS
+    "files.associations": {
+        "*.css": "tailwindcss"
+    },
+
+    // 💡 Подсказки и задержка отображения
+    "editor.quickSuggestions": {
+        "strings": "on"
+    },
+    "editor.quickSuggestionsDelay": 100,
+
+    // 💡 Телеметрия отключена
+    "telemetry.telemetryLevel": "off",
+
+    // 💡 Prisma форматирование
+    "[prisma]": {
+        "editor.defaultFormatter": "Prisma.prisma"
+    },
+
+    // 💡 Отключаем фолдинг и селектор вставки
+    "editor.folding": false,
+    "editor.pasteAs.enabled": false,
+    "editor.pasteAs.showPasteSelector": "never",
+
+    // 💡 Поддержка Tailwind class attributes
+    "tailwindCSS.classAttributes": ["class", "className", "headerClassName"],
+
+    // 💡 Advanced New File — фильтры и поведение
+    "advancedNewFile.exclude": {
+        "node_modules": true,
+        "node_modules_electron": true,
+        "dev": true,
+        "dist": true,
+        "ios": true,
+        "android": true,
+        "build": true,
+        ".dart_tool": true,
+        "macos": true,
+        "linux": true,
+        "windows": true
+    },
+    "advancedNewFile.showInformationMessages": true,
+    "advancedNewFile.convenienceOptions": ["last", "current", "root"],
+
+    // 💡 Ассоциации для SVG
+    "workbench.editorAssociations": {
+        "*.svg": "default"
+    },
+
+    // 💡 Chat / Copilot / AI интеграции
+    "chat.agent.enabled": true,
+    "github.copilot.chat.agent.thinkingTool": true
+
+    // "workbench.editor.customLabels.patterns": {
+    //     "**/app/**/{page,layout,index}.{ts,tsx}": "(${dirname})/${filename}.${extname}",
+    //     "**/index.{ts,tsx}": "${dirname}/index.${extname}"
+    // }
 }

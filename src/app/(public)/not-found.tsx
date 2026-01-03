@@ -10,7 +10,7 @@ export default async function NotFound() {
     const t = await getTranslations("NotFound");
 
     return (
-        <div className="wrapper min-h-screen flex items-center justify-center">
+        <div className="wrapper flex-1 flex items-center justify-center">
             <div className="max-w-md w-full text-center">
                 <div className="relative mb-8">
                     <h1 className="text-9xl font-bold text-gray-200 select-none">404</h1>

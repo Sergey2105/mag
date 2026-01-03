@@ -53,7 +53,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     return (
         <html lang={locale} suppressHydrationWarning>
             <body className={proximaNova.className}>
-                <main className="min-h-screen">
+                <main className="flex flex-col min-h-screen">
                     <Providers locale={locale} messages={messages}>
                         <NuqsAdapter>{children}</NuqsAdapter>
                     </Providers>
