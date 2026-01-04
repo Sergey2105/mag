@@ -7,6 +7,7 @@ export const metadata: Metadata = {
 };
 
 const fetchProducts = async () => {
+    //try
     const response = await productService.fetchAllWithoutPagination();
     return response.data;
 };
