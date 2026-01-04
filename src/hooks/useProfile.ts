@@ -1,48 +1,42 @@
-import { saveAccessToken } from "@/services/auth/auth-token.service";
-import authService from "@/services/auth/auth.service";
+import { AuthTokenService } from "@/services/auth/auth-token.service";
 import userService from "@/services/user.service";
 import { transformUserToState } from "@/untils/transform-user-to-state";
-import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMemo } from "react";
 
 export function useProfile() {
-    const { data, isLoading } = useQuery({
-        queryKey: ["profile"],
-        queryFn: () => userService.fetchProfile(),
-        refetchInterval: 1800000, // 30 minutes
-        retry: false, // не повторять в случае ошибки
-    });
+    const hasToken = Boolean(AuthTokenService());
 
     const {
-        isSuccess,
-        data: dataTokens,
-        refetch,
+        data,
+        isLoading,
+        isError,
+        refetch: refetchProfile,
     } = useQuery({
-        queryKey: ["new tokens"],
-        queryFn: () => authService.getNewTokens(),
-        enabled: !data?.data,
-        retry: false,
+        queryKey: ["profile", hasToken],
+        queryFn: () => userService.fetchProfile(),
+        refetchInterval: 1800000, // 30 minutes
+        retry: false, // не повторять в случае ошибки - interceptor сам обработает обновление токена
+        enabled: hasToken,
     });
-
-    useEffect(() => {
-        if (!isSuccess) return;
-
-        if (dataTokens?.data?.accessToken) {
-            saveAccessToken(dataTokens.data.accessToken);
-            refetch();
-        }
-    }, [isSuccess]);
 
     const profile = data?.data;
 
     const userState = profile ? transformUserToState(profile) : null;
 
+    const isLoggedIn = useMemo(() => {
+        if (profile) return true;
+        if (!hasToken) return false;
+        return false;
+    }, [profile, hasToken]);
+
     return {
-        isLoading,
-        refetch,
+        isLoading: hasToken ? isLoading : false,
+        refetch: refetchProfile,
         user: {
             ...profile,
             ...userState,
+            isLoggedIn,
         },
     };
 }

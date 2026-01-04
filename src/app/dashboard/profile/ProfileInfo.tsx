@@ -3,7 +3,7 @@ import { PUBLIC_PAGES } from "@/constants/routes";
 import { useProfile } from "@/hooks/useProfile";
 import { cn } from "@/lib/utils";
 import authService from "@/services/auth/auth.service";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { LoaderCircleIcon } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -11,6 +11,7 @@ import { useTransition } from "react";
 
 export function ProfileInfo() {
     const router = useRouter();
+    const queryClient = useQueryClient();
 
     const { isLoading, refetch, user } = useProfile();
 
@@ -22,7 +23,13 @@ export function ProfileInfo() {
         mutationKey: ["logout"],
         mutationFn: () => authService.logout(),
         onSuccess() {
-            refetch();
+            // Очищаем кэш React Query при выходе
+            // Инвалидируем все запросы профиля - это заставит компоненты перерендериться
+            // и перепроверить токен из cookies
+            queryClient.removeQueries({ queryKey: ["profile"] });
+            queryClient.removeQueries({ queryKey: ["cart"] });
+            queryClient.invalidateQueries({ queryKey: ["profile"] });
+
             startTransition(() => {
                 router.push(PUBLIC_PAGES.LOGIN);
             });

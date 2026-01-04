@@ -4,12 +4,7 @@ import axios from "axios";
 //серверная
 
 export async function getProductsServer() {
-    const res = await fetch("http://localhost:5000/api/products", {
-        next: {
-            revalidate: 3600,
-            tags: ["products"],
-        },
-    });
+    const res = await fetch("http://localhost:5000/api/products");
 
     if (!res.ok) {
         throw new Error("Failed to fetch products");
@@ -29,12 +24,7 @@ export async function getProductByIdServer(id: string) {
 }
 
 export async function getProductBySlugServer(slug: string) {
-    const res = await fetch(`http://localhost:5000/api/products/category/${slug}`, {
-        next: {
-            revalidate: 3600,
-            tags: ["products-by-slag"],
-        },
-    });
+    const res = await fetch(`http://localhost:5000/api/products/category/${slug}`);
 
     if (!res.ok) {
         throw new Error("Failed to fetch products");
