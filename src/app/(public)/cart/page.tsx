@@ -1,9 +1,11 @@
 import productService from "@/services/product.service";
 import type { Metadata } from "next";
 import { Cart } from "./Cart";
+import BreadcrumbsServer from "@/components/Breadcrumbs/BreadcrumbsServer";
+import { Title } from "@/components/ui/title";
 
 export const metadata: Metadata = {
-    title: "Cart",
+    title: "Корзина",
 };
 
 const fetchProducts = async () => {
@@ -17,5 +19,13 @@ export default async function CartPage() {
 
     console.log(products);
 
-    return <Cart products={products} />;
+    return (
+        <div className="wrapper mt-10">
+            <BreadcrumbsServer lastLabel="Корзина" />
+            <Title text="Корзина" size="lg" className="mt-6" />
+            <div className="mt-10">
+                <Cart products={products} />
+            </div>
+        </div>
+    );
 }

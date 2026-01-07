@@ -39,4 +39,5 @@ export interface IPagination {
 export interface IProductsPagination {
     products: IProduct[];
     pagination: IPagination;
+    category: ICategory;
 }

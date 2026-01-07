@@ -20,6 +20,7 @@ interface PriceValueProps {
     variant?: "regular" | "sale";
     className?: string;
     locale?: string;
+    minus?: boolean;
 }
 
 export type PriceType = {
@@ -46,13 +47,14 @@ const Price = ({ className, children, onSale }: PriceProps) => {
     );
 };
 
-const PriceValue = ({ price, currency = "RUB", locale = "ru-RU", variant = "regular", className }: PriceValueProps) => {
+const PriceValue = ({ price, currency = "RUB", locale = "ru-RU", variant = "regular", className, minus = false }: PriceValueProps) => {
     const { onSale } = usePriceContext();
 
     if (price == null) return null;
 
     return (
         <span className={cn("leading-tight", variant === "regular" ? (onSale ? "text-muted-foreground line-through" : "text-foreground") : "text-foreground", className)}>
+            {minus ? "- " : ""}
             {formatCurrency(price, currency, locale)}
         </span>
     );

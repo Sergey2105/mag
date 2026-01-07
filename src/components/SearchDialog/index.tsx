@@ -12,14 +12,14 @@ import Link from "next/link";
 import { AxiosResponse } from "axios";
 
 interface SearchDialogProps<T, C> {
-    onSearch: (query: string) => Promise<AxiosResponse<T[]>>;
+    onSearch: (query: string) => Promise<T[]>;
     renderItem: (item: T) => React.ReactNode;
     getItemKey: (item: T) => string | number;
     getItemHref: (item: T) => string;
     placeholder?: string;
 
     initialData?: {
-        onSearch: () => Promise<AxiosResponse<C[]>>;
+        onSearch: () => Promise<C[]>;
         renderItem: (item: C) => React.ReactNode;
         getItemKey: (item: C) => string | number;
         getItemHref: (item: C) => string;
@@ -45,7 +45,6 @@ export function SearchDialog<T, C>(props: SearchDialogProps<T, C>) {
     } = useQuery({
         queryKey: ["dialog-initial-data"],
         queryFn: () => initialData!.onSearch(),
-        select: (d) => d.data,
         enabled: !!initialData && open,
         staleTime: 5 * 60 * 1000,
         gcTime: 30 * 60 * 1000,
@@ -54,7 +53,6 @@ export function SearchDialog<T, C>(props: SearchDialogProps<T, C>) {
     const { data, isLoading, isFetching, isError } = useQuery({
         queryKey: ["dialog-search", searchQuery],
         queryFn: () => onSearch(searchQuery.trim()),
-        select: (d) => d.data,
         enabled: !!searchQuery,
     });
 

@@ -30,12 +30,14 @@ export default function ProductCardControls(props: ProductCardControlsProps) {
                 <ShoppingBasket className="size-5" /> <span className="hidden xs:inline">В корзину</span>
             </Button>
 
-            <QuantityButton
-                value={quantity}
-                changePlus={() => setQuantity(Math.max(0, quantity + 1))}
-                changeMinus={() => setQuantity((prev) => Math.max(1, prev - 1))}
-                className={quantityClassName || "hidden 2xl:flex"}
-            />
+            {showQuantityControls && (
+                <QuantityButton
+                    value={quantity}
+                    changePlus={() => setQuantity(Math.max(0, quantity + 1))}
+                    changeMinus={() => setQuantity((prev) => Math.max(1, prev - 1))}
+                    className={quantityClassName || "hidden 2xl:flex"}
+                />
+            )}
         </div>
     );
 }

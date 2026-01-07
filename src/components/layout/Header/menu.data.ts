@@ -22,4 +22,12 @@ export const MENU = [
         href: PUBLIC_PAGES.CONTACTS,
         name: "Contacts",
     },
+    // {
+    //     href: PUBLIC_PAGES.FAVORITES,
+    //     name: "Favorites",
+    // },
+    // {
+    //     href: PUBLIC_PAGES.CART,
+    //     name: "Cart",
+    // },
 ];

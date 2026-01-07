@@ -22,7 +22,10 @@
         "About": "About",
         "Contacts": "Contact",
         "Blog": "Blog",
-        "Catalog": "Catalog"
+        "Catalog": "Catalog",
+
+        "Favorites": "Favorites",
+        "Cart": "Cart"
     },
     "NotFound": {
         "title": "Page not found",

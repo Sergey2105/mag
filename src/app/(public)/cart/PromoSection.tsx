@@ -1,6 +1,8 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Price, PriceValue } from "@/components/ui/price";
 import promoService from "@/services/promo.service";
 import { useMutation } from "@tanstack/react-query";
 import { Dispatch, SetStateAction, useState } from "react";
@@ -39,15 +41,18 @@ export function PromoSection({ subTotal, promoCode, setPromoCode, discountValue,
     return (
         <div>
             {discountValue > 0 && (
-                <div className="flex justify-between text-green-600">
-                    <span>Promo discount</span>
-                    <span>-${promoDiscount.toFixed(2)}</span>
+                <div className="flex justify-between">
+                    <span className="text-green-600">Скидка по промокоду</span>
+
+                    <Price className="gap-0">
+                        <PriceValue className="text-[18px] font-bold" price={Number(promoDiscount.toFixed(2))} currency="RUB" minus />
+                    </Price>
                 </div>
             )}
             <div className="mt-6">
-                <label className="block mb-2 font-medium">Promo code:</label>
+                <label className="block mb-2 font-medium">Промокод:</label>
                 <div className="flex space-x-2">
-                    <input
+                    <Input
                         type="text"
                         className="border border-gray-300 rounded px-3 py-2 w-full"
                         placeholder="Enter promo code"
@@ -61,7 +66,7 @@ export function PromoSection({ subTotal, promoCode, setPromoCode, discountValue,
                         }}
                         disabled={isCheckingPromo}
                     >
-                        {isCheckingPromo ? "Checking..." : "Apply"}
+                        {isCheckingPromo ? "Checking..." : "Применить"}
                     </Button>
                     <Button onClick={() => setDiscountValue(0)}>Сбросить</Button>
                 </div>

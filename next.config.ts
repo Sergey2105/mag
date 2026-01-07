@@ -54,15 +54,15 @@ const nextConfig: NextConfig = {
         return [
             {
                 source: "/auth/google",
-                destination: "http://localhost:4200/auth/google",
+                destination: "http://localhost:5000/auth/google",
             },
             {
                 source: "/auth/github",
-                destination: "http://localhost:4200/auth/github",
+                destination: "http://localhost:5000/auth/github",
             },
             {
                 source: "/uploads/:path*",
-                destination: "http://localhost:4200/uploads/:path*",
+                destination: "http://localhost:5000/uploads/:path*",
             },
         ];
     },

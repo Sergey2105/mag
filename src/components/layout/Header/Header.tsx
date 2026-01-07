@@ -36,7 +36,7 @@ export function Header() {
                             searchLabel="Найденные товары"
                             placeholder="Поиск товаров..."
                             initialData={{
-                                onSearch: () => categoryService.fetchAll(),
+                                onSearch: () => categoryService.getAllCategory(),
                                 renderItem: (category) => (
                                     <>
                                         <Image className="rounded-sm h-8 w-8" width={32} height={32} src={category.images} alt={category.name} />

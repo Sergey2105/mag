@@ -4,11 +4,7 @@ import { ProductPagination } from "@/components/Pagination";
 import TopBar from "@/components/TopBar";
 import { Title } from "@/components/ui/title";
 import productService from "@/services/product.service";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
 
 interface Props {
     params: {
@@ -35,6 +31,7 @@ const fetchProducts = async (slug: string, sort?: "asc" | "desc", priceFrom?: nu
         };
 
         const response = await productService.getProductBySlug(slug, options);
+        console.log(response.data);
         return response.data;
     } catch (error: any) {
         if (error.response?.status === 404) {
@@ -52,9 +49,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
     const maxPrice = priceTo ? Number(priceTo) : undefined;
     const currentPage = page ? Number(page) : 1;
 
-    const { pagination, products } = await fetchProducts(slug, sort, minPrice, maxPrice, currentPage);
-
-    console.log(products);
+    const { category, pagination, products } = await fetchProducts(slug, sort, minPrice, maxPrice, currentPage);
 
     return (
         <div className="wrapper mt-10">

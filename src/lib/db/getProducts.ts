@@ -1,6 +1,3 @@
-import { unstable_cache } from "next/cache";
-
-import axios from "axios";
 //серверная
 
 export async function getProductsServer() {

@@ -1,7 +1,7 @@
 //для minddleware
 export const ADMIN_PAGES = {
     HOME: "/admin",
-    MANAGER: "/manager",
+    // MANAGER: "/manager",
 };
 
 export const DASHBOARD_PAGES = {
@@ -9,9 +9,9 @@ export const DASHBOARD_PAGES = {
     PROFILE: `/dashboard/profile`,
 };
 
-export const PREMIUM_PAGES = {
-    HOME: "/premium",
-};
+// export const PREMIUM_PAGES = {
+//     HOME: "/premium",
+// };
 
 export const PUBLIC_PAGES = {
     HOME: "/",
@@ -26,5 +26,4 @@ export const PUBLIC_PAGES = {
     CART: "/cart",
     LOGIN: `/login`,
     REGISTER: `/register`,
-    PLANS: "/plans",
 };

@@ -5,10 +5,10 @@ import { useTranslations } from "next-intl";
 import Phone from "@/shared/img/Phone.png";
 import Image from "next/image";
 import Link from "next/link";
-import { ADMIN_PAGES, DASHBOARD_PAGES, PREMIUM_PAGES, PUBLIC_PAGES } from "@/constants/routes";
+import { ADMIN_PAGES, DASHBOARD_PAGES, PUBLIC_PAGES } from "@/constants/routes";
 import { useQuery } from "@tanstack/react-query";
 
-const pages = [PUBLIC_PAGES.LOGIN, DASHBOARD_PAGES.PROFILE, PREMIUM_PAGES.HOME, ADMIN_PAGES.HOME, ADMIN_PAGES.MANAGER];
+const pages = [PUBLIC_PAGES.LOGIN, DASHBOARD_PAGES.PROFILE, ADMIN_PAGES.HOME];
 
 export default function HomePage() {
     const t = useTranslations("Home");

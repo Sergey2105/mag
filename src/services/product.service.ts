@@ -16,15 +16,11 @@ class ProductService {
     //     return axiosClassic.get<IProduct[]>(`${this._BASE_URL}/${id}`);
     // }
 
-    async getProductBySearch(search: string) {
-        return axiosClassic
-            .get<{ products: IProduct[] }>(this._BASE_URL, {
-                params: { search: search },
-            })
-            .then((response) => ({
-                ...response,
-                data: response.data.products || [],
-            }));
+    async getProductBySearch(search: string): Promise<IProduct[]> {
+        const response = await axiosClassic.get<{ products: IProduct[] }>(this._BASE_URL, {
+            params: { search },
+        });
+        return response.data.products || [];
     }
 
     async getProductBySlug(

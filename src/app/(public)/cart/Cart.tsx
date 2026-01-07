@@ -6,23 +6,24 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { CartItemsList } from "./CartItemsList";
 import { PromoSection } from "./PromoSection";
-import { SecondItemModal } from "./SecondItemModal";
 import { useCheckout } from "./useCheckout";
 import { IProduct } from "@/types/product.interface";
 import { Button } from "@/components/ui/button";
+import { Price, PriceValue } from "@/components/ui/price";
+import { PUBLIC_PAGES } from "@/constants/routes";
+import { cn } from "@/lib/utils";
 
-interface Props {
+interface CartProps {
     products: IProduct[];
+    className?: string;
 }
 
-export function Cart({ products }: Props) {
+export function Cart(props: CartProps) {
+    const { className, products } = props;
     const { cartItems } = useCart();
-    console.log(cartItems);
     const { user } = useProfile();
 
     const router = useRouter();
-
-    const [isShowSecondItemModal, setIsShowSecondItemModal] = useState(false);
 
     const [promoCode, setPromoCode] = useState("");
     const [discountValue, setDiscountValue] = useState(0);
@@ -31,38 +32,30 @@ export function Cart({ products }: Props) {
 
     const finalTotal = subTotal - subTotal * (discountValue / 100);
 
-    const [notInCartProducts, setNotInCartProducts] = useState<IProduct[]>([]);
-
-    useEffect(() => {
-        if (isShowSecondItemModal) {
-            const cartIds = new Set(cartItems.map((item) => item.product.id));
-            const filtered = products.filter((product) => !cartIds.has(product.id)); //удаляем элменты которые есть в карзине
-            setNotInCartProducts(filtered.slice(0, 3)); //3 элента покзываем
-        }
-    }, [isShowSecondItemModal, cartItems, products]);
-
     const { checkout, isPending } = useCheckout({
         promoCode,
     });
 
     return (
-        <div className="wrapper">
-            <h1 className="text-2xl font-bold mb-4 text-center">Your Cart</h1>
-
-            <CartItemsList cartItems={cartItems} onShowSecondItemModal={() => setIsShowSecondItemModal(true)} />
+        <div className={cn("", className)}>
+            <CartItemsList cartItems={cartItems} />
 
             {!!cartItems.length && (
                 <div className="mt-4 border-t pt-4">
                     <div className="flex justify-between">
-                        <span>Subtotal</span>
-                        <span>${subTotal.toFixed(2)}</span>
+                        <span>Товары</span>
+                        <Price>
+                            <PriceValue className="text-[18px] font-bold" price={Number(subTotal.toFixed(2))} currency="RUB" />
+                        </Price>
                     </div>
                     {user.isLoggedIn && (
                         <PromoSection subTotal={subTotal} discountValue={discountValue} promoCode={promoCode} setPromoCode={setPromoCode} setDiscountValue={setDiscountValue} />
                     )}
                     <div className="flex justify-between mt-4 text-lg font-semibold">
-                        <span>Total</span>
-                        <span>${finalTotal.toFixed(2)}</span>
+                        <span>Итог</span>
+                        <Price>
+                            <PriceValue className="text-[18px] font-bold" price={Number(finalTotal.toFixed(2))} currency="RUB" />
+                        </Price>
                     </div>
                 </div>
             )}
@@ -71,18 +64,16 @@ export function Cart({ products }: Props) {
                 (user.isLoggedIn ? (
                     <div className="mt-6">
                         <Button className="w-full" onClick={() => checkout()} disabled={isPending}>
-                            {isPending ? "Processing..." : "Checkout"}
+                            {isPending ? "Processing..." : "Заказать"}
                         </Button>
                     </div>
                 ) : (
                     <div className="mt-6">
-                        <Button className="w-full" onClick={() => router.push("/login")}>
-                            Login to checkout
+                        <Button className="w-full" onClick={() => router.push(PUBLIC_PAGES.LOGIN)}>
+                            Войдите чтобы оформить заказ
                         </Button>
                     </div>
                 ))}
-
-            {isShowSecondItemModal && <SecondItemModal notInCartProducts={notInCartProducts} setIsShowSecondItemModal={setIsShowSecondItemModal} />}
         </div>
     );
 }
