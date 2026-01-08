@@ -32,7 +32,7 @@ export async function getProductByIdServer(id: string) {
 //     return res.json();
 // }
 
-interface Options {
+interface GetProductsOptions {
     search?: string;
     minPrice?: number;
     maxPrice?: number;
@@ -42,14 +42,17 @@ interface Options {
     sortOrder?: "asc" | "desc";
 }
 
-export async function getProductsBySlugServer(slug: string, options: Options = {}) {
-    const params = new URLSearchParams();
+export async function getProductsBySlugServer(slug: string, options: GetProductsOptions = {}) {
+    const { search, minPrice, maxPrice, page = 1, limit = 20, sortBy = "createdAt", sortOrder = "desc" } = options;
 
-    Object.entries(options).forEach(([key, value]) => {
-        if (value !== undefined) {
-            params.append(key, String(value));
-        }
-    });
+    const params = new URLSearchParams();
+    if (search) params.append("search", search);
+    if (minPrice !== undefined) params.append("minPrice", String(minPrice));
+    if (maxPrice !== undefined) params.append("maxPrice", String(maxPrice));
+    params.append("page", String(page));
+    params.append("limit", String(limit));
+    params.append("sortBy", sortBy);
+    params.append("sortOrder", sortOrder);
 
     const res = await fetch(`http://localhost:5000/api/products/by-slug/${slug}?${params.toString()}`, {
         next: {
@@ -67,8 +70,8 @@ export async function getProductsBySlugServer(slug: string, options: Options = {
     }
 
     return res.json();
+    //после добавления товара -> revalidateTag(`products-${slug}`);
 }
-
 // для полуечния продуктов без пагинации
 export async function getProductWithoutPaginationServer() {
     const res = await fetch(`http://localhost:5000/api/products/without-pagination`);
