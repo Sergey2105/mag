@@ -9,7 +9,6 @@ import { useDebounce } from "@/hooks/useDebouce";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "@/components/ui/Loader";
 import Link from "next/link";
-import { AxiosResponse } from "axios";
 
 interface SearchDialogProps<T, C> {
     onSearch: (query: string) => Promise<T[]>;

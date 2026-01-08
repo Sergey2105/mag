@@ -3,6 +3,7 @@ import BreadcrumbsServer from "@/components/Breadcrumbs/BreadcrumbsServer";
 import { ProductPagination } from "@/components/Pagination";
 import TopBar from "@/components/TopBar";
 import { Title } from "@/components/ui/title";
+import { getProductsBySlugServer } from "@/lib/db/getProducts";
 import productService from "@/services/product.service";
 import { notFound } from "next/navigation";
 
@@ -19,27 +20,26 @@ interface Props {
     };
 }
 
-const fetchProducts = async (slug: string, sort?: "asc" | "desc", priceFrom?: number, priceTo?: number, page?: number) => {
-    try {
-        const options = {
-            sortBy: sort ? ("price" as const) : ("createdAt" as const),
-            sortOrder: sort || ("desc" as const),
-            minPrice: priceFrom,
-            maxPrice: priceTo,
-            page: page || 1,
-            limit: 20,
-        };
+// const fetchProducts = async (slug: string, sort?: "asc" | "desc", priceFrom?: number, priceTo?: number, page?: number) => {
+//     try {
+//         const options = {
+//             sortBy: sort ? ("price" as const) : ("createdAt" as const),
+//             sortOrder: sort || ("desc" as const),
+//             minPrice: priceFrom,
+//             maxPrice: priceTo,
+//             page: page || 1,
+//             limit: 20,
+//         };
 
-        const response = await productService.getProductBySlug(slug, options);
-        console.log(response.data);
-        return response.data;
-    } catch (error: any) {
-        if (error.response?.status === 404) {
-            notFound();
-        }
-        throw error;
-    }
-};
+//         const response = await productService.getProductBySlug(slug, options);
+//         return response.data;
+//     } catch (error: any) {
+//         if (error.response?.status === 404) {
+//             notFound();
+//         }
+//         throw error;
+//     }
+// };
 
 export default async function CategoryPage({ params, searchParams }: Props) {
     const { slug } = await params;
@@ -49,7 +49,16 @@ export default async function CategoryPage({ params, searchParams }: Props) {
     const maxPrice = priceTo ? Number(priceTo) : undefined;
     const currentPage = page ? Number(page) : 1;
 
-    const { category, pagination, products } = await fetchProducts(slug, sort, minPrice, maxPrice, currentPage);
+    // const { category, pagination, products } = await fetchProducts(slug, sort, minPrice, maxPrice, currentPage);
+
+    const { category, pagination, products } = await getProductsBySlugServer(slug, {
+        sortBy: sort ? "price" : "createdAt",
+        sortOrder: sort ?? "desc",
+        minPrice,
+        maxPrice,
+        page: currentPage,
+        limit: 20,
+    });
 
     return (
         <div className="wrapper mt-10">

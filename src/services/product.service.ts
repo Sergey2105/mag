@@ -4,10 +4,12 @@ import { IProduct, IProductsPagination } from "@/types/product.interface";
 class ProductService {
     private _BASE_URL = "/products";
 
+    //не использую
     async fetchAll() {
         return axiosClassic.get<IProductsPagination>(this._BASE_URL);
     }
 
+    //получение товаров без пагинации
     async fetchAllWithoutPagination() {
         return axiosClassic.get<IProduct[]>(`${this._BASE_URL}/without-pagination`);
     }
@@ -16,6 +18,7 @@ class ProductService {
     //     return axiosClassic.get<IProduct[]>(`${this._BASE_URL}/${id}`);
     // }
 
+    //поиск товаров
     async getProductBySearch(search: string): Promise<IProduct[]> {
         const response = await axiosClassic.get<{ products: IProduct[] }>(this._BASE_URL, {
             params: { search },

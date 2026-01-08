@@ -29,7 +29,6 @@ export default function ProductInfo(props: any) {
                 <p className="text-[16px] font-normal">Под заказ</p>
             </div>
             <div className="flex flex-col gap-1">
-                {/* <p className="text-[32px] font-semibold">{price}</p> */}
                 <Price>
                     <PriceValue className="text-[32px] font-semibold" price={price} currency="RUB" />
                 </Price>

@@ -24,7 +24,7 @@ class CartService {
         });
     }
 
-    async syncCart(items) {
+    async syncCart(items: any) {
         return instance.post(`${this._BASE_URL}/sync`, { items });
     }
 }

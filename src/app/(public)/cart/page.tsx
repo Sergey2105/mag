@@ -1,21 +1,15 @@
-import productService from "@/services/product.service";
 import type { Metadata } from "next";
 import { Cart } from "./Cart";
 import BreadcrumbsServer from "@/components/Breadcrumbs/BreadcrumbsServer";
 import { Title } from "@/components/ui/title";
+import { getProductWithoutPaginationServer } from "@/lib/db/getProducts";
 
 export const metadata: Metadata = {
     title: "Корзина",
 };
 
-const fetchProducts = async () => {
-    //try
-    const response = await productService.fetchAllWithoutPagination();
-    return response.data;
-};
-
 export default async function CartPage() {
-    const products = await fetchProducts();
+    const products = await getProductWithoutPaginationServer();
 
     console.log(products);
 

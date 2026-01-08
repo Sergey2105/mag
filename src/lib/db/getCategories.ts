@@ -15,5 +15,3 @@ export async function getCategoriesServer() {
 
     return res.json();
 }
-
-// revalidateTag('categories');

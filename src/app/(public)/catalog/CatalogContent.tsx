@@ -1,9 +1,8 @@
 import CatalogList from "@/app/(public)/catalog/CatalogList";
 import { getCategoriesServer } from "@/lib/db/getCategories";
-import categoryService from "@/services/category.service";
 
 export default async function CatalogContent() {
-    const categories = await categoryService.getAllCategory();
+    const categories = await getCategoriesServer();
 
     return (
         <>
