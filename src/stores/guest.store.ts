@@ -11,6 +11,8 @@ interface IGuestCartStore {
     addItem: (product: TCartProduct, quantity: number, asSecondItem?: boolean) => void;
     removeItem: (cartItemId: string) => void;
     clearCart: () => void;
+    incrementItem: (cartItemId: string) => void;
+    decrementItem: (cartItemId: string) => void;
 }
 
 export const useGuestCartStore = create(
@@ -54,6 +56,25 @@ export const useGuestCartStore = create(
             },
             clearCart: () => {
                 set({ items: [] });
+            },
+            incrementItem: (cartItemId: string) => {
+                set({
+                    items: get().items.map((item) => (item.id === cartItemId ? { ...item, quantity: item.quantity + 1 } : item)),
+                });
+            },
+            decrementItem: (cartItemId: string) => {
+                const { items, removeItem } = get();
+                const item = items.find((item) => item.id === cartItemId);
+
+                if (!item) return;
+
+                if (item.quantity === 1) {
+                    removeItem(cartItemId);
+                    return;
+                }
+                set({
+                    items: items.map((item) => (item.id === cartItemId ? { ...item, quantity: item.quantity - 1 } : item)),
+                });
             },
         }),
         {

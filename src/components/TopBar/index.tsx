@@ -21,13 +21,15 @@ export default function TopBar(props: any) {
 
     const resetAll = () => {
         const params = new URLSearchParams(searchParams);
-        params.forEach((_, key) => {
-            if (key !== "page") params.delete(key);
-        });
+        if (params.size !== 0) {
+            params.forEach((_, key) => {
+                if (key !== "page") params.delete(key);
+            });
 
-        const query = params.toString();
+            const query = params.toString();
 
-        router.replace(query ? `${pathname}?${query}` : pathname);
+            router.replace(query ? `${pathname}?${query}` : pathname);
+        }
     };
 
     return (

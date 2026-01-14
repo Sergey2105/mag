@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { getLocale, getMessages } from "next-intl/server";
 import { Header } from "@/components/layout/Header/Header";
 import { SITE_DESCRIPTION, SITE_NAME } from "@/constants/seo.constants";
@@ -55,7 +54,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <body className={proximaNova.className}>
                 <main className="flex flex-col min-h-screen">
                     <Providers locale={locale} messages={messages}>
-                        <NuqsAdapter>{children}</NuqsAdapter>
+                        {children}
                     </Providers>
                 </main>
             </body>

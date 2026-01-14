@@ -16,6 +16,18 @@ class CartService {
         });
     }
 
+    async incrementInCart(cartItemId: string) {
+        return instance.patch<ICart>(`${this._BASE_URL}/increment`, {
+            cartItemId,
+        });
+    }
+    async decrementInCart(cartItemId: string) {
+        console.log("q");
+        return instance.patch<ICart>(`${this._BASE_URL}/decrement`, {
+            cartItemId,
+        });
+    }
+
     async removeFromCart(cartItemId: string) {
         return instance.delete<ICart>(this._BASE_URL, {
             data: {

@@ -8,6 +8,8 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { useState } from "react";
 import { QuantityButton } from "@/components/ui/buttons/QuantityButton";
 import { Button } from "@/components/ui/button";
+import { useQuantityIncrementInCart } from "@/hooks/useQuantityIncrementInCart";
+import { useQuantityDecrementInCart } from "@/hooks/useQuantityDecrementInCart";
 
 interface CartItemProps {
     info: ISimpleCartItem;
@@ -16,7 +18,8 @@ interface CartItemProps {
 export function CartItem(props: CartItemProps) {
     const { info } = props;
     const remove = useRemoveFromCart();
-    const [quantity, setQuantity] = useState(info.quantity);
+    const increment = useQuantityIncrementInCart();
+    const decrement = useQuantityDecrementInCart();
 
     return (
         <Card className="pt-3 pb-6 px-3 lg:px-6 lg:pt-6 lg:pb-7 2xl:px-4 2xl:pt-4 2xl:pb-4 flex flex-col md:flex-row items-start md:items-center justify-between">
@@ -38,7 +41,7 @@ export function CartItem(props: CartItemProps) {
                     <Heart className="size-5" />
                     <span className="sr-only">Избранное</span>
                 </Button>
-                <QuantityButton value={quantity} changePlus={() => setQuantity(Math.max(0, quantity + 1))} changeMinus={() => setQuantity((prev) => Math.max(1, prev - 1))} />
+                <QuantityButton value={info.quantity} changePlus={() => increment.mutate(info.id)} changeMinus={() => decrement.mutate(info.id)} />
             </CardFooter>
         </Card>
     );
