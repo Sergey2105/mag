@@ -3,7 +3,7 @@
 import { PUBLIC_PAGES } from "@/constants/routes";
 import authService from "@/services/auth/auth.service";
 import { IFormData } from "@/services/auth/auth.types";
-import { useGuestCartStore } from "@/stores/guest.store";
+import { useGuestCartStore } from "@/stores/guestCart.store";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter } from "next/navigation";

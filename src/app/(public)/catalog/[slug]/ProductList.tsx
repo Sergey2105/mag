@@ -24,7 +24,7 @@ export default function ProductList(props: Props) {
                             category={product.category.name}
                             slug={product.category.slug}
                             discountPrice={product.discountPrice}
-                            isHasSecondDiscount={product.isHasSecondDiscount}
+                            isActive={product.isActive}
                         />
                     ))}
                 </div>

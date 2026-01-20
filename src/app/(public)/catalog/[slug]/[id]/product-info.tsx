@@ -2,15 +2,15 @@
 
 import ProductCardControls from "@/components/ProductCardControls";
 import { Price, PriceValue } from "@/components/ui/price";
-import { useAddToCart } from "@/hooks/useAddToCart";
+import { useAddToCart } from "@/hooks/cart/useAddToCart";
 import { cn } from "@/lib/utils";
 
 interface ProductInfoProps {}
 
 export default function ProductInfo(props: any) {
-    const { id, name, images, price, description, discountPrice, isHasSecondDiscount, className } = props;
+    const { id, name, images, price, description, discountPrice, isActive, className } = props;
 
-    const product = { id, name, images, price, discountPrice, isHasSecondDiscount };
+    const product = { id, name, images, price, discountPrice, isActive };
 
     const mutation = useAddToCart();
 

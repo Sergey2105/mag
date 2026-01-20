@@ -1,5 +1,5 @@
 "use client";
-import { useCart } from "@/hooks/useCart";
+import { useCart } from "@/hooks/cart/useCart";
 import { useProfile } from "@/hooks/useProfile";
 
 import { useRouter } from "next/navigation";
@@ -14,22 +14,20 @@ import { PUBLIC_PAGES } from "@/constants/routes";
 import { cn } from "@/lib/utils";
 
 interface CartProps {
-    products: IProduct[];
     className?: string;
 }
 
 export function Cart(props: CartProps) {
-    const { className, products } = props;
-    const { cartItems } = useCart();
-    const { user } = useProfile();
-
+    const { className } = props;
     const router = useRouter();
+    const { user } = useProfile();
+    const { cartItems } = useCart();
+    console.log(cartItems);
 
     const [promoCode, setPromoCode] = useState("");
     const [discountValue, setDiscountValue] = useState(0);
 
-    const subTotal = cartItems.reduce((acc, item) => acc + (item.asSecondItem ? item.product.discountPrice : item.product.price) * item.quantity, 0);
-
+    const subTotal = cartItems.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
     const finalTotal = subTotal - subTotal * (discountValue / 100);
 
     const { checkout, isPending } = useCheckout({

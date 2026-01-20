@@ -8,18 +8,19 @@ import { persist } from "zustand/middleware";
 
 interface IGuestCartStore {
     items: ISimpleCartItem[];
-    addItem: (product: TCartProduct, quantity: number, asSecondItem?: boolean) => void;
+    addItem: (product: TCartProduct, quantity: number) => void;
     removeItem: (cartItemId: string) => void;
     clearCart: () => void;
     incrementItem: (cartItemId: string) => void;
     decrementItem: (cartItemId: string) => void;
+    setItems: (items: ISimpleCartItem[]) => void;
 }
 
 export const useGuestCartStore = create(
     persist<IGuestCartStore>(
         (set, get) => ({
             items: [],
-            addItem: (product, quantity, asSecondItem) => {
+            addItem: (product, quantity) => {
                 const currentItems = get().items;
                 const existingItem = currentItems.find((item) => item.product.id === product.id);
 
@@ -28,8 +29,7 @@ export const useGuestCartStore = create(
                         item.product.id === product.id
                             ? {
                                   ...item,
-                                  quantity: item.quantity + quantity,
-                                  asSecondItem,
+                                  quantity: Math.min(item.quantity + quantity, item.product.stock),
                               }
                             : item,
                     );
@@ -42,8 +42,7 @@ export const useGuestCartStore = create(
                             {
                                 id: createId(),
                                 product,
-                                quantity,
-                                asSecondItem,
+                                quantity: Math.min(quantity, product.stock),
                             },
                         ],
                     });
@@ -59,7 +58,11 @@ export const useGuestCartStore = create(
             },
             incrementItem: (cartItemId: string) => {
                 set({
-                    items: get().items.map((item) => (item.id === cartItemId ? { ...item, quantity: item.quantity + 1 } : item)),
+                    items: get().items.map((item) => {
+                        if (item.id !== cartItemId) return item;
+                        if (item.quantity >= item.product.stock) return item;
+                        return { ...item, quantity: item.quantity + 1 };
+                    }),
                 });
             },
             decrementItem: (cartItemId: string) => {
@@ -75,6 +78,9 @@ export const useGuestCartStore = create(
                 set({
                     items: items.map((item) => (item.id === cartItemId ? { ...item, quantity: item.quantity - 1 } : item)),
                 });
+            },
+            setItems: (items) => {
+                set({ items });
             },
         }),
         {

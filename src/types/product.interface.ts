@@ -1,5 +1,4 @@
 import { ICategory } from "@/types/category.interface";
-import { IFavorite } from "@/types/favorites.types";
 
 export interface IProduct {
     id: string;
@@ -16,18 +15,20 @@ export interface IProduct {
     categoryID: string;
 
     isActive: boolean;
-    isHasSecondDiscount: boolean;
 
     createdAt: Date;
     updatedAt: Date;
 
     category: ICategory;
 
+    stock: number;
+
     // cartItems: ICartItem[];
     // favorites: IFavorite[];
 }
 
-export type TCartProduct = Pick<IProduct, "id" | "name" | "images" | "price" | "discountPrice" | "isHasSecondDiscount">;
+export type TCartProduct = Pick<IProduct, "id" | "name" | "images" | "price" | "discountPrice" | "stock">;
+export type TFavoriteProduct = Pick<IProduct, "id" | "name" | "images" | "price">;
 
 export interface IPagination {
     total: number;

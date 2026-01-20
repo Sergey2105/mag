@@ -4,7 +4,7 @@ import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { DASHBOARD_PAGES, PUBLIC_PAGES } from "@/constants/routes";
-import { useCart } from "@/hooks/useCart";
+import { useCart } from "@/hooks/cart/useCart";
 import { Heart, ShoppingCart, User } from "lucide-react";
 import Link from "next/link";
 

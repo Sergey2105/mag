@@ -3,8 +3,8 @@
 import cartService from "@/services/cart.service";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useProfile } from "./useProfile";
-import { useGuestCartStore } from "@/stores/guest.store";
+import { useProfile } from "../useProfile";
+import { useGuestCartStore } from "@/stores/guestCart.store";
 
 export function useQuantityDecrementInCart() {
     const { user } = useProfile();

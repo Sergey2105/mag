@@ -8,11 +8,10 @@ class CartService {
         return instance.get<ICart>(this._BASE_URL);
     }
 
-    async addToCart(productId: string, quantity: number, asSecondItem?: boolean) {
+    async addToCart(productId: string, quantity: number) {
         return instance.post<ICart>(this._BASE_URL, {
             productId,
             quantity,
-            asSecondItem,
         });
     }
 
@@ -22,7 +21,6 @@ class CartService {
         });
     }
     async decrementInCart(cartItemId: string) {
-        console.log("q");
         return instance.patch<ICart>(`${this._BASE_URL}/decrement`, {
             cartItemId,
         });
@@ -38,6 +36,10 @@ class CartService {
 
     async syncCart(items: any) {
         return instance.post(`${this._BASE_URL}/sync`, { items });
+    }
+
+    async normalizeGuestCart(dto: any) {
+        return instance.post(`${this._BASE_URL}/normalize-guest`, dto);
     }
 }
 

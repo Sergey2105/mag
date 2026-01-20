@@ -17,5 +17,4 @@ export interface ISimpleCartItem {
     id: string;
     product: TCartProduct;
     quantity: number;
-    asSecondItem?: boolean;
 }

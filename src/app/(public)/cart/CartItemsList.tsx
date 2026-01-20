@@ -1,4 +1,4 @@
-import { useRemoveFromCart } from "@/hooks/useRemoveFromCart";
+import { useRemoveFromCart } from "@/hooks/cart/useRemoveFromCart";
 import { ISimpleCartItem } from "@/types/cart.types";
 import { CartItem } from "./CartItem";
 

@@ -60,6 +60,8 @@ export default async function CategoryPage({ params, searchParams }: Props) {
         limit: 20,
     });
 
+    console.log(products);
+
     return (
         <div className="wrapper mt-10">
             <BreadcrumbsServer />

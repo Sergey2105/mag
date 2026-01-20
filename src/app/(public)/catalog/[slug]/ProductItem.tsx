@@ -5,20 +5,30 @@ import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { PUBLIC_PAGES } from "@/constants/routes";
 import ProductCardControls from "@/components/ProductCardControls";
-import { useAddToCart } from "@/hooks/useAddToCart";
+import { useAddToCart } from "@/hooks/cart/useAddToCart";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Price, PriceValue } from "@/components/ui/price";
+import { Button } from "@/components/ui/button";
+import { useToggleFavorites } from "@/hooks/useToggleFavorites";
 
 export default function ProductItem(props: any) {
-    const { id, name, price, images, category, className, slug, discountPrice, isHasSecondDiscount } = props;
-    const product = { id, name, images, price, discountPrice, isHasSecondDiscount };
+    const { id, name, price, images, category, className, slug, discountPrice, isActive } = props;
+    const product = { id, name, images, price, discountPrice, isActive };
 
-    const mutation = useAddToCart();
+    const mutationCart = useAddToCart();
 
     const handleAddToCart = (quantity: number) => {
-        mutation.mutate({
+        mutationCart.mutate({
             product,
             quantity: quantity,
+        });
+    };
+
+    const mutationFavorites = useToggleFavorites();
+
+    const handleToggleFavorites = (productId: string) => {
+        mutationFavorites.mutate({
+            productId,
         });
     };
 
@@ -42,6 +52,7 @@ export default function ProductItem(props: any) {
                                 </Price>
                             </div>
 
+                            <Button onClick={() => handleToggleFavorites(id)}>favorite</Button>
                             <ProductCardControls className="mt-2.5" handleAddToCart={handleAddToCart} />
                         </div>
                     </CardFooter>

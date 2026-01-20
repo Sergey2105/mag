@@ -1,15 +1,13 @@
 import { Price, PriceValue } from "@/components/ui/price";
-import { useRemoveFromCart } from "@/hooks/useRemoveFromCart";
+import { useRemoveFromCart } from "@/hooks/cart/useRemoveFromCart";
 import { ISimpleCartItem } from "@/types/cart.types";
-import cn from "clsx";
 import { Heart, Trash2 } from "lucide-react";
 import Image from "next/image";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { useState } from "react";
 import { QuantityButton } from "@/components/ui/buttons/QuantityButton";
 import { Button } from "@/components/ui/button";
-import { useQuantityIncrementInCart } from "@/hooks/useQuantityIncrementInCart";
-import { useQuantityDecrementInCart } from "@/hooks/useQuantityDecrementInCart";
+import { useQuantityIncrementInCart } from "@/hooks/cart/useQuantityIncrementInCart";
+import { useQuantityDecrementInCart } from "@/hooks/cart/useQuantityDecrementInCart";
 
 interface CartItemProps {
     info: ISimpleCartItem;

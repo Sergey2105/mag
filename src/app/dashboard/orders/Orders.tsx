@@ -53,14 +53,7 @@ export function Orders() {
                                             <div>
                                                 <div className="font-semibold">{item.product?.name}</div>
                                                 <div className="text-sm text-gray-500">
-                                                    {item.asSecondItem ? (
-                                                        <>
-                                                            <span className="line-through">${item.product.price.toFixed(2)}</span>
-                                                            <span className="text-green-600 ml-2">${item.product.discountPrice.toFixed(2)}</span>
-                                                        </>
-                                                    ) : (
-                                                        <>${item.product.price.toFixed(2)}</>
-                                                    )}
+                                                    <>${item.product.price.toFixed(2)}</>
                                                 </div>
                                             </div>
                                         </div>
