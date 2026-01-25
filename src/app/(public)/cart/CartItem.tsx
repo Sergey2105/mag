@@ -19,6 +19,12 @@ export function CartItem(props: CartItemProps) {
     const increment = useQuantityIncrementInCart();
     const decrement = useQuantityDecrementInCart();
 
+    const changeQuantityIncrement = () => {
+        if (info.quantity < info.product.stock) {
+            increment.mutate(info.id);
+        }
+    };
+
     return (
         <Card className="pt-3 pb-6 px-3 lg:px-6 lg:pt-6 lg:pb-7 2xl:px-4 2xl:pt-4 2xl:pb-4 flex flex-col md:flex-row items-start md:items-center justify-between">
             <CardContent className="flex items-center  w-full gap-4 px-0 py-0">
@@ -39,7 +45,7 @@ export function CartItem(props: CartItemProps) {
                     <Heart className="size-5" />
                     <span className="sr-only">Избранное</span>
                 </Button>
-                <QuantityButton value={info.quantity} changePlus={() => increment.mutate(info.id)} changeMinus={() => decrement.mutate(info.id)} />
+                <QuantityButton value={info.quantity} changePlus={changeQuantityIncrement} changeMinus={() => decrement.mutate(info.id)} />
             </CardFooter>
         </Card>
     );

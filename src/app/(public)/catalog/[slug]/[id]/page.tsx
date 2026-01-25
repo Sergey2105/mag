@@ -24,7 +24,16 @@ export default async function CatalogProductPage({ params }: Props) {
             <BreadcrumbsServer lastLabel={product?.name} />
 
             <div className="flex mt-10 gap-1 flex-row items-stretch">
-                <ProductInfo id={product?.id} name={product?.name} images={product?.images} description={product?.description} price={product?.price} className={"flex-[50_1]"} />
+                <ProductInfo
+                    id={product?.id}
+                    name={product?.name}
+                    images={product?.images}
+                    description={product?.description}
+                    price={product?.price}
+                    stock={product?.stock}
+                    isAvailable={product?.isAvailable}
+                    className={"flex-[50_1]"}
+                />
                 <ProductImage images={product?.images} name={product?.name} className={"flex-[50_1] h-150"} />
             </div>
         </div>

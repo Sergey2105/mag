@@ -12,8 +12,8 @@ import { Button } from "@/components/ui/button";
 import { useToggleFavorites } from "@/hooks/useToggleFavorites";
 
 export default function ProductItem(props: any) {
-    const { id, name, price, images, category, className, slug, discountPrice, isActive } = props;
-    const product = { id, name, images, price, discountPrice, isActive };
+    const { id, name, price, images, category, className, slug, discountPrice, isAvailable, stock } = props;
+    const product = { id, name, images, price, discountPrice, isAvailable, stock };
 
     const mutationCart = useAddToCart();
 
@@ -53,7 +53,7 @@ export default function ProductItem(props: any) {
                             </div>
 
                             <Button onClick={() => handleToggleFavorites(id)}>favorite</Button>
-                            <ProductCardControls className="mt-2.5" handleAddToCart={handleAddToCart} />
+                            <ProductCardControls className="mt-2.5" handleAddToCart={handleAddToCart} maxValue={stock} />
                         </div>
                     </CardFooter>
                 </Card>

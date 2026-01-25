@@ -8,9 +8,9 @@ import { cn } from "@/lib/utils";
 interface ProductInfoProps {}
 
 export default function ProductInfo(props: any) {
-    const { id, name, images, price, description, discountPrice, isActive, className } = props;
+    const { id, name, images, price, description, discountPrice, isAvailable, stock, className } = props;
 
-    const product = { id, name, images, price, discountPrice, isActive };
+    const product = { id, name, images, price, discountPrice, isAvailable, stock };
 
     const mutation = useAddToCart();
 
@@ -32,7 +32,7 @@ export default function ProductInfo(props: any) {
                 <Price>
                     <PriceValue className="text-[32px] font-semibold" price={price} currency="RUB" />
                 </Price>
-                <ProductCardControls handleAddToCart={handleAddToCart} quantityClassName="flex" />
+                <ProductCardControls handleAddToCart={handleAddToCart} quantityClassName="flex" maxValue={stock} />
             </div>
             <div className="">
                 <p className="text-[18px] font-normal text-neutral-400">Описание:</p>

@@ -5,6 +5,19 @@ import { useGuestCartStore } from "@/stores/guestCart.store";
 import cartService from "@/services/cart.service";
 import { useMemo, useEffect, useRef } from "react";
 
+interface normalizedGuestCartItem {
+    quantity: number;
+    product: {
+        id: string;
+        name: string;
+        images: string[];
+        price: number;
+        discountPrice: number;
+        isAvailable: boolean;
+        stock: number;
+    };
+}
+
 export function useCart() {
     const { user, isLoading: isUserLoading } = useProfile();
     const guestItems = useGuestCartStore((s) => s.items); // вот
@@ -23,6 +36,15 @@ export function useCart() {
         }
     };
 
+    const fetchNormalizedItems = async (items: { items: { productId: string; quantity: number }[] }): Promise<normalizedGuestCartItem[]> => {
+        try {
+            const { data } = await cartService.normalizeGuestCart(items);
+            return data?.items || [];
+        } catch {
+            return [];
+        }
+    };
+
     const { data = [], isLoading: isCartLoading } = useQuery({
         queryKey: ["cart", user.isLoggedIn],
         queryFn: fetchCartItems,
@@ -31,17 +53,13 @@ export function useCart() {
 
     const { data: normalizedItems, isLoading: isValidating } = useQuery({
         queryKey: ["normalize-guest-cart", guestItems.map((i) => `${i.product.id}-${i.quantity}`).join(",")],
-        queryFn: async () => {
-            if (guestItems.length === 0) return null;
-
-            const { data } = await cartService.normalizeGuestCart({
+        queryFn: () =>
+            fetchNormalizedItems({
                 items: guestItems.map((item) => ({
                     productId: item.product.id,
                     quantity: item.quantity,
                 })),
-            });
-            return data?.items ?? [];
-        },
+            }),
         enabled: !user.isLoggedIn && guestItems.length > 0,
         refetchInterval: 30_000,
         refetchOnWindowFocus: true,
@@ -49,8 +67,6 @@ export function useCart() {
 
     useEffect(() => {
         if (!normalizedItems || normalizedItems.length === 0) return;
-
-        console.log(normalizedItems);
 
         const oldItemsMap = new Map(guestItems.map((item) => [item.product.id, item.id]));
 
@@ -62,7 +78,7 @@ export function useCart() {
                 images: item.product.images,
                 price: item.product.price,
                 discountPrice: item.product.discountPrice,
-                isActive: item.product.isActive,
+                isAvailable: item.product.isAvailable,
                 stock: item.product.stock,
             },
             quantity: Math.min(item.quantity, item.product.stock),
@@ -119,4 +135,3 @@ export function useCart() {
         isLoading,
     };
 }
-// сделать что бы коллчитво пордстривалось пот кол-во и зкоризин (корз 50 - бд стало 49 - корзина станет 49)

@@ -15,6 +15,7 @@ export interface IProduct {
     categoryID: string;
 
     isActive: boolean;
+    isAvailable:boolean
 
     createdAt: Date;
     updatedAt: Date;
@@ -27,7 +28,7 @@ export interface IProduct {
     // favorites: IFavorite[];
 }
 
-export type TCartProduct = Pick<IProduct, "id" | "name" | "images" | "price" | "discountPrice" | "stock">;
+export type TCartProduct = Pick<IProduct, "id" | "name" | "images" | "price" | "discountPrice" | "stock" | "isAvailable">;
 export type TFavoriteProduct = Pick<IProduct, "id" | "name" | "images" | "price">;
 
 export interface IPagination {

@@ -1,8 +1,7 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, MinusIcon, PlusIcon } from "lucide-react";
+import { MinusIcon, PlusIcon } from "lucide-react";
 import { ButtonGroup, ButtonGroupText } from "@/components/ui/button-group";
 import { cn } from "@/lib/utils";
 

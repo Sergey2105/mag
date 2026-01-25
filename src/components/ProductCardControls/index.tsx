@@ -12,10 +12,11 @@ interface ProductCardControlsProps {
     handleAddToCart: (val: number) => void;
     hiddenQuantityControls?: boolean;
     quantityClassName?: string;
+    maxValue: number;
 }
 
 export default function ProductCardControls(props: ProductCardControlsProps) {
-    const { className, handleAddToCart, hiddenQuantityControls = false, quantityClassName } = props;
+    const { className, handleAddToCart, hiddenQuantityControls = false, quantityClassName, maxValue } = props;
     const isWide = useMediaQuery("(min-width: 1440px)");
     const [quantity, setQuantity] = useState(1);
 
@@ -24,6 +25,16 @@ export default function ProductCardControls(props: ProductCardControlsProps) {
             setQuantity(1);
         }
     }, [hiddenQuantityControls, isWide]);
+
+    const changeQuantityIncrement = () => {
+        if (quantity < maxValue) {
+            setQuantity(Math.max(0, quantity + 1));
+        }
+    };
+
+    const changeQuantityDecrement = () => {
+        setQuantity((prev) => Math.max(1, prev - 1));
+    };
 
     return (
         <div className={cn("flex w-full gap-1", className)}>
@@ -39,12 +50,7 @@ export default function ProductCardControls(props: ProductCardControlsProps) {
             </Button>
 
             {!hiddenQuantityControls && (
-                <QuantityButton
-                    value={quantity}
-                    changePlus={() => setQuantity(Math.max(0, quantity + 1))}
-                    changeMinus={() => setQuantity((prev) => Math.max(1, prev - 1))}
-                    className={quantityClassName ?? "hidden 2xl:flex"}
-                />
+                <QuantityButton value={quantity} changePlus={changeQuantityIncrement} changeMinus={changeQuantityDecrement} className={quantityClassName ?? "hidden 2xl:flex"} />
             )}
         </div>
     );
